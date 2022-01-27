@@ -7,6 +7,8 @@ class Campus : IComparable
   private Instituto instituto;
   private Curso[] cursos = new Curso[1];
   private int ncur;
+  private Diretoria[] diretorias = new Diretoria[1];
+  private int ndir;
 
   public Campus(int id,string descricao)
   {
@@ -95,6 +97,17 @@ class Campus : IComparable
     for(int i=n; i < ncur - 1; i++)
       cursos[i] = cursos[i+1];
     ncur--;
+  }
+
+  public void DiretoriaInserir(Diretoria d)
+  {
+    if(diretorias.Length == ndir)
+    {
+      Array.Resize(ref diretorias, 2*diretorias.Length);
+    }
+    diretorias[ndir] = d;
+    ndir++;
+
   }
 
   public int CompareTo(object obj)

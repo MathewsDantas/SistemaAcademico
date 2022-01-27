@@ -5,6 +5,7 @@ class MainClass
   private static Ninstituto ninstituto = new Ninstituto();
   private static Ncampus ncampus = new Ncampus();
   private static Ncurso ncurso = new Ncurso();
+  private static Ndiretoria ndiretoria = new Ndiretoria();
   
   static void Main(string[] args)
   {
@@ -28,6 +29,8 @@ class MainClass
           case 10: CursoListar(); break;
           case 11: CursoAtualizar(); break;
           case 12: CursoExcluir(); break;
+          case 13: DiretoriaInserir(); break;
+          case 14: DiretoriaListar(); break;
         }
       }
       catch(Exception erro){
@@ -52,7 +55,9 @@ class MainClass
     Console.WriteLine("9 - Curso Inserir");
     Console.WriteLine("10 - Curso Listar");
     Console.WriteLine("11 - Curso Atualizar");
-    Console.WriteLine("12 - Curso Excluir");
+    Console.WriteLine("12 - Curso Excluir\n");
+    Console.WriteLine("13 - Diretoria Inserir");
+    Console.WriteLine("14 - Diretoria Listar");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -293,4 +298,38 @@ class MainClass
     Curso cur = cam.CursoListar(id_cur);
     ncurso.Excluir(cur);
   }
+
+  public static void DiretoriaInserir()
+  {
+    int aux = 0;
+    while (aux == 0)
+    {
+
+      Console.WriteLine("--> Inserindo diretoria: ");
+      Console.WriteLine("Informe o Id da diretoria");
+      int id = int.Parse(Console.ReadLine());
+      Console.WriteLine("Digite a descricao da diretoria");
+      string descricao = Console.ReadLine();
+
+      Instituto ins = CampusListar_returnI();
+      Console.WriteLine("Informe o Id do campus para inserir a diretoria: ");
+      int id_campus = int.Parse(Console.ReadLine());
+      Campus cam = ins.CampusListar(id_campus);
+      Diretoria d = new Diretoria(id, descricao, cam);
+      ndiretoria.Inserir(d);
+      Console.WriteLine();
+      Console.WriteLine("Deseja adicionar a diretoria em outro campus?\n SIM - 0\n NAO - 1");
+      aux = int.Parse(Console.ReadLine());
+      Console.WriteLine();
+    
+    }
+  }
+  public static void DiretoriaListar()
+  {
+    Console.WriteLine("--> Listando diretorias: ");
+    Diretoria[] d = ndiretoria.Listar();
+    foreach( Diretoria i in d) Console.WriteLine(i);
+  }
+  
 }
+
