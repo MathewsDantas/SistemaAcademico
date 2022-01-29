@@ -110,6 +110,44 @@ class Campus : IComparable
 
   }
 
+  public Diretoria[] DiretoriaListar()
+  {
+    Diretoria[] d = new Diretoria[ndir];
+    Array.Copy(diretorias,d,ndir);
+    return d;
+  }
+
+  public Diretoria DiretoriaListar(int id)
+  {
+    for(int i = 0; i<ndir; i++)
+      if(diretorias[i].GetId() == id) return diretorias[i];
+    return null;
+  }
+  
+  public int DiretoriaIndice(Diretoria d)
+  {
+    for(int i=0; i<ndir; i++)
+      if(diretorias[i] == d) return i;
+    return -1;
+  }
+
+  public void DiretoriaExcluir(Diretoria d)
+  {
+    int n = DiretoriaIndice(d);
+    if(n == -1) return;
+    for(int i=n; i < ndir - 1; i++)
+      diretorias[i] = diretorias[i+1];
+    ndir--;
+  }
+
+  public void DiretoriaAtualizar(Diretoria d)
+  {
+    Diretoria d_atual = DiretoriaListar(d.GetId());
+    if(d_atual == null) return;
+    d_atual.SetDescricao(d.GetDescricao());
+  }
+
+
   public int CompareTo(object obj)
   {
     Campus c = (Campus) obj;

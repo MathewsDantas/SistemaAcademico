@@ -31,6 +31,8 @@ class MainClass
           case 12: CursoExcluir(); break;
           case 13: DiretoriaInserir(); break;
           case 14: DiretoriaListar(); break;
+          case 15: DiretoriaAtualizar(); break;
+          case 16: DiretoriaExcluir(); break;
         }
       }
       catch(Exception erro){
@@ -58,6 +60,8 @@ class MainClass
     Console.WriteLine("12 - Curso Excluir\n");
     Console.WriteLine("13 - Diretoria Inserir");
     Console.WriteLine("14 - Diretoria Listar");
+    Console.WriteLine("15 - Diretoria Atualizar");
+    Console.WriteLine("16 - Diretoria Excluir");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -256,6 +260,11 @@ class MainClass
     Console.WriteLine("--> Listando cursos: ");
     Curso[] c = ncurso.Listar();
     foreach(Curso i in c) Console.WriteLine(i);
+    if(c.Length == 0)
+    {
+      Console.WriteLine("Nenhum Curso cadastrado. ");
+      return;
+    }
   }
 
   public static void CursoAtualizar()
@@ -268,6 +277,11 @@ class MainClass
     Curso[] cursos = cam.CursoListar();
     foreach(Curso c in cursos) Console.WriteLine(c);
     Console.WriteLine();
+    if(cursos.Length == 0)
+    {
+      Console.WriteLine("Nenhum Curso cadastrado. ");
+      return;
+    }
 
     Console.WriteLine("--> Atualizando curso: ");
     Console.WriteLine("Informe o Id do curso a ser atualizado: ");
@@ -290,7 +304,11 @@ class MainClass
     Curso[] cursos = cam.CursoListar();
     foreach(Curso c in cursos) Console.WriteLine(c);
     Console.WriteLine();
-
+    if(cursos.Length == 0)
+    {
+      Console.WriteLine("Nenhum Curso cadastrado. ");
+      return;
+    }
     Console.WriteLine("--> Excluindo curso: ");
     Console.WriteLine("Informe o Id do curso a ser excluido: ");
     int id_cur = int.Parse(Console.ReadLine());
@@ -329,7 +347,68 @@ class MainClass
     Console.WriteLine("--> Listando diretorias: ");
     Diretoria[] d = ndiretoria.Listar();
     foreach( Diretoria i in d) Console.WriteLine(i);
+    if(d.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
   }
+
+  
+  public static void DiretoriaExcluir()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus em que a diretoria que deseja excluir está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+    Console.WriteLine();
+
+    Console.WriteLine("--> Excluindo Diretoria: ");
+    Console.WriteLine("Informe o Id da diretoria a ser excluido: ");
+
+    int id_dir = int.Parse(Console.ReadLine());
+
+    Diretoria dir = cam.DiretoriaListar(id_dir);
+
+    ndiretoria.Excluir(dir);
+    
+  }
+
+    public static void DiretoriaAtualizar()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus em que a diretoria está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    Console.WriteLine();
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+    Console.WriteLine("--> Atualizando diretoria: ");
+    Console.WriteLine("Informe o Id da diretoria a ser atualizado: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Console.WriteLine("Insira a nova descricao: ");
+    string descricao = Console.ReadLine();
+    
+    Diretoria diretoria_velha = cam.DiretoriaListar(id_dir);
+    ndiretoria.Atualizar(diretoria_velha,descricao);
+    
+  }
+
   
 }
 
