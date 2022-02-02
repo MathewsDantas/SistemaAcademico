@@ -8,6 +8,7 @@ class MainClass
   private static Ncurso ncurso = new Ncurso();
   private static Ndiretoria ndiretoria = new Ndiretoria();
   private static Naluno naluno = new Naluno();
+  private static Nprofessor nprofessor = new Nprofessor();
   
   static void Main(string[] args)
   {
@@ -39,6 +40,10 @@ class MainClass
           case 18: AlunoListar(); break;
           case 19: AlunoAtualizar(); break;
           case 20: AlunoExcluir(); break;
+          case 21: ProfessorInserir(); break;
+          case 22: ProfessorListar(); break;
+          case 23: ProfessorAtualizar(); break;
+          case 24: ProfessorExcluir(); break;          
         }
       }
       catch(Exception erro){
@@ -72,6 +77,10 @@ class MainClass
     Console.WriteLine("18 - Aluno Listar");
     Console.WriteLine("19 - Aluno Atualizar");
     Console.WriteLine("20 - Aluno Excluir\n");
+    Console.WriteLine("21 - Professor Inserir");
+    Console.WriteLine("22 - Professor Listar");
+    Console.WriteLine("23 - Professor Atualizar");
+    Console.WriteLine("24 - Professor Excluir\n");    
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -525,6 +534,111 @@ class MainClass
     naluno.Excluir(aln);
   }
 
-  
+  public static void ProfessorInserir()
+  {
+    Console.WriteLine("--> Inserindo Professor: ");
+    
+    Console.WriteLine("Digite o nome do Professor: ");
+    string nome = Console.ReadLine();
+    Console.WriteLine("Informe a matricula do Professor: ");
+    int matricula = int.Parse(Console.ReadLine());
+
+    Instituto ins = CampusListar_returnI();
+    Console.WriteLine("Informe o Id do Campus do Professor: ");
+    int id_cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_cam);
+    Diretoria[] dir = cam.DiretoriaListar();
+    foreach(Diretoria d in dir) Console.WriteLine(d);
+    Console.WriteLine("\nInforme o Id da diretoria do Professor: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir_prf = cam.DiretoriaListar(id_dir);
+
+    Professor pr = new Professor(nome,matricula,dir_prf);
+    nprofessor.Inserir(pr);
+  }
+
+  public static void ProfessorListar()
+  {
+    Console.WriteLine("--> Listando Professores ");
+    List<Professor> prfs = nprofessor.Listar();
+    foreach(Professor p in prfs) Console.WriteLine(p);
+  }
+
+  public static void ProfessorAtualizar()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus do Professor está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    Console.WriteLine();
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+
+    Console.WriteLine("Informe o Id da diretoria que o Professor está presente: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir = cam.DiretoriaListar(id_dir);
+    List<Professor> prfs = dir.ProfessorListar();
+    foreach(Professor p in prfs) Console.WriteLine(p);
+    Console.WriteLine();
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhum Professor encontrado. ");
+      return;
+    }
+    Console.WriteLine("--> Atualizando Professor: ");
+    Console.WriteLine("Insira o Id do Professor a ser atualizado: ");
+    int id_prf = int.Parse(Console.ReadLine());
+    Console.WriteLine("Insira o novo nome: ");
+    string nome = Console.ReadLine();
+    Console.WriteLine("Insira a nova matricula: ");
+    int matricula = int.Parse(Console.ReadLine());
+
+    Professor pr = new Professor(nome,matricula,dir);
+    pr.SetId(id_prf);
+    nprofessor.Atualizar(pr);
+  }
+
+  public static void  ProfessorExcluir()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus em que o Professor está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+    Console.WriteLine();
+    Console.WriteLine("Informe o Id da diretoria do Professor: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir = cam.DiretoriaListar(id_dir);
+    List<Professor> prfs = dir.ProfessorListar();
+    foreach(Professor p in prfs) Console.WriteLine(p);
+    Console.WriteLine();
+    if(prfs.Count == 0)
+    {
+      Console.WriteLine("Nenhum Professor encontrado. ");
+      return;
+    }
+    Console.WriteLine("--> Excluindo Professor: ");
+    Console.WriteLine("Informe o Id do Professor a ser excluido: ");
+    int id_Prfs = int.Parse(Console.ReadLine());
+    
+
+    Professor prf = dir.ProfessorListar(id_Prfs);
+    nprofessor.Excluir(prf);
+  }
+
 }
 

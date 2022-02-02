@@ -7,9 +7,8 @@ class Professor
   private int matricula;
   private Diretoria diretoria;
 
-  public Professor(int id,string nome, int matricula, Diretoria diretoria)
+  public Professor(string nome, int matricula, Diretoria diretoria)
   {
-    this.id = id;
     this.nome = nome;
     this.matricula = matricula;
     this.diretoria = diretoria;
@@ -57,6 +56,6 @@ class Professor
 
   public override string ToString()
   {
-      return "IdAluno: "+id+"- Professor: "+nome+"- Matricula: "+matricula;
+      return "IdProfessor: "+id+"- Professor: "+nome+"- Matricula: "+matricula;
   }
 }
