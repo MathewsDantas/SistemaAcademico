@@ -9,6 +9,7 @@ class MainClass
   private static Ndiretoria ndiretoria = new Ndiretoria();
   private static Naluno naluno = new Naluno();
   private static Nprofessor nprofessor = new Nprofessor();
+  private static Nambiente nambiente = new Nambiente();
   
   static void Main(string[] args)
   {
@@ -43,7 +44,11 @@ class MainClass
           case 21: ProfessorInserir(); break;
           case 22: ProfessorListar(); break;
           case 23: ProfessorAtualizar(); break;
-          case 24: ProfessorExcluir(); break;          
+          case 24: ProfessorExcluir(); break;
+          case 25: AmbienteInserir(); break;
+          case 26: AmbienteListar(); break;
+          case 27: AmbienteAtualizar(); break;
+          case 28: AmbienteExcluir(); break;             
         }
       }
       catch(Exception erro){
@@ -80,7 +85,11 @@ class MainClass
     Console.WriteLine("21 - Professor Inserir");
     Console.WriteLine("22 - Professor Listar");
     Console.WriteLine("23 - Professor Atualizar");
-    Console.WriteLine("24 - Professor Excluir\n");    
+    Console.WriteLine("24 - Professor Excluir\n");
+    Console.WriteLine("25 - Ambiente Inserir");
+    Console.WriteLine("26 - Ambiente Listar");
+    Console.WriteLine("27 - Ambiente Atualizar");
+    Console.WriteLine("28 - Ambiente Excluir\n");     
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -480,7 +489,7 @@ class MainClass
     List<Aluno> alns = dir.AlunoListar();
     foreach(Aluno a in alns) Console.WriteLine(a);
     Console.WriteLine();
-    if(diretorias.Length == 0)
+    if(alns.Count == 0)
     {
       Console.WriteLine("Nenhum Aluno encontrado. ");
       return;
@@ -586,7 +595,7 @@ class MainClass
     List<Professor> prfs = dir.ProfessorListar();
     foreach(Professor p in prfs) Console.WriteLine(p);
     Console.WriteLine();
-    if(diretorias.Length == 0)
+    if(prfs.Count == 0)
     {
       Console.WriteLine("Nenhum Professor encontrado. ");
       return;
@@ -640,5 +649,108 @@ class MainClass
     nprofessor.Excluir(prf);
   }
 
-}
 
+
+  public static void AmbienteInserir()
+  {
+    Console.WriteLine("--> Inserindo ambiente: ");
+    
+    Console.WriteLine("Digite o nome do ambiente: ");
+    string espaco = Console.ReadLine();
+
+    Instituto ins = CampusListar_returnI();
+    Console.WriteLine("Informe o Id do Campus do ambiente: ");
+    int id_cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_cam);
+    Diretoria[] dir = cam.DiretoriaListar();
+    foreach(Diretoria d in dir) Console.WriteLine(d);
+    Console.WriteLine("\nInforme o Id da diretoria do ambiente: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir_amb = cam.DiretoriaListar(id_dir);
+
+    Ambiente amb = new Ambiente(espaco,dir_amb);
+    nambiente.Inserir(amb);
+  }
+
+  public static void AmbienteListar()
+  {
+    Console.WriteLine("--> Listando ambientes: ");
+    List<Ambiente> ambs = nambiente.Listar();
+    foreach(Ambiente a in ambs) Console.WriteLine(a);
+  }
+
+  public static void AmbienteAtualizar()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus do ambiente está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    Console.WriteLine();
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+
+    Console.WriteLine("Informe o Id da diretoria que o ambiente está presente: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir = cam.DiretoriaListar(id_dir);
+    List<Ambiente> ambs = dir.AmbienteListar();
+    foreach(Ambiente a in ambs) Console.WriteLine(a);
+    Console.WriteLine();
+    if(ambs.Count == 0)
+    {
+      Console.WriteLine("Nenhum Ambiente encontrado. ");
+      return;
+    }
+    Console.WriteLine("--> Atualizando ambiente: ");
+    Console.WriteLine("Insira o Id do ambiente a ser atualizado: ");
+    int id_amb = int.Parse(Console.ReadLine());
+    Console.WriteLine("Insira o novo espaco: ");
+    string espaco = Console.ReadLine();
+
+
+    Ambiente amb = new Ambiente(espaco,dir);
+    amb.SetId(id_amb);
+    nambiente.Atualizar(amb);
+  }
+
+  public static void AmbienteExcluir()
+  {
+    Instituto ins = CampusListar_returnI();
+    
+    Console.WriteLine("Informe o Id do Campus em que o ambiente está: ");
+    int id_Cam = int.Parse(Console.ReadLine());
+    Campus cam = ins.CampusListar(id_Cam);
+
+    Diretoria[] diretorias = cam.DiretoriaListar();
+    foreach(Diretoria d in diretorias) Console.WriteLine(d);
+    if(diretorias.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+    Console.WriteLine();
+    Console.WriteLine("Informe o Id da diretoria do ambiente: ");
+    int id_dir = int.Parse(Console.ReadLine());
+    Diretoria dir = cam.DiretoriaListar(id_dir);
+    List<Ambiente> ambs = dir.AmbienteListar();
+    foreach(Ambiente a in ambs) Console.WriteLine(a);
+    Console.WriteLine();
+    if(ambs.Count == 0)
+    {
+      Console.WriteLine("Nenhum Ambiente encontrado. ");
+      return;
+    }
+    Console.WriteLine("--> Excluindo Ambiente: ");
+    Console.WriteLine("Informe o Id do ambiente a ser excluido: ");
+    int id_Ambs = int.Parse(Console.ReadLine());
+    
+
+    Ambiente amb = dir.AmbienteListar(id_Ambs);
+    nambiente.Excluir(amb);
+  }
+}

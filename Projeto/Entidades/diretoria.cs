@@ -9,6 +9,7 @@ class Diretoria
   private Instituto instituto;
   private List<Aluno> alunos = new List<Aluno>();
   private List<Professor> professores = new List<Professor>();
+  private List<Ambiente> ambientes = new List<Ambiente>();
 
   public Diretoria(int id, string descricao, Campus campus)
   {
@@ -106,6 +107,36 @@ class Diretoria
   public void ProfessorExcluir(Professor p)
   {
     if(p != null) professores.Remove(p);
+  }
+
+  public void AmbienteInserir(Ambiente a)
+  {
+      ambientes.Add(a);
+  }
+
+  public List<Ambiente> AmbienteListar()
+  {
+    return ambientes;
+  }
+
+  public Ambiente AmbienteListar(int id)
+  {
+    for(int j=0; j < ambientes.Count; j++)
+      if(ambientes[j].GetId() == id) return ambientes[j];
+    return null;
+  }
+
+  public void AmbienteAtualizar(Ambiente a)
+  {
+    Ambiente amb_atual = AmbienteListar(a.GetId());
+    if(amb_atual == null) return;
+    amb_atual.SetEspaco(a.GetEspaco());
+    
+  }
+
+  public void AmbienteExcluir(Ambiente a)
+  {
+    if(a != null) ambientes.Remove(a);
   }
 
   public override string ToString()
