@@ -444,7 +444,7 @@ class MainClass
     Console.WriteLine("Digite o nome do aluno: ");
     string nome = Console.ReadLine();
     Console.WriteLine("Informe a matricula do aluno: ");
-    int matricula = int.Parse(Console.ReadLine());
+    long matricula = long.Parse(Console.ReadLine());
 
     Instituto ins = CampusListar_returnI();
     Console.WriteLine("Informe o Id do Campus do aluno: ");
@@ -500,7 +500,7 @@ class MainClass
     Console.WriteLine("Insira o novo nome: ");
     string nome = Console.ReadLine();
     Console.WriteLine("Insira a nova matricula: ");
-    int matricula = int.Parse(Console.ReadLine());
+    long matricula = long.Parse(Console.ReadLine());
 
     Aluno al = new Aluno(nome,matricula,dir);
     al.SetId(id_aln);
@@ -550,7 +550,7 @@ class MainClass
     Console.WriteLine("Digite o nome do Professor: ");
     string nome = Console.ReadLine();
     Console.WriteLine("Informe a matricula do Professor: ");
-    int matricula = int.Parse(Console.ReadLine());
+    long matricula = long.Parse(Console.ReadLine());
 
     Instituto ins = CampusListar_returnI();
     Console.WriteLine("Informe o Id do Campus do Professor: ");
@@ -606,7 +606,7 @@ class MainClass
     Console.WriteLine("Insira o novo nome: ");
     string nome = Console.ReadLine();
     Console.WriteLine("Insira a nova matricula: ");
-    int matricula = int.Parse(Console.ReadLine());
+    long matricula = long.Parse(Console.ReadLine());
 
     Professor pr = new Professor(nome,matricula,dir);
     pr.SetId(id_prf);
@@ -753,4 +753,5 @@ class MainClass
     Ambiente amb = dir.AmbienteListar(id_Ambs);
     nambiente.Excluir(amb);
   }
+  
 }

@@ -4,10 +4,10 @@ class Professor
 {
   private int id;
   private string nome;
-  private int matricula;
+  private long matricula;
   private Diretoria diretoria;
 
-  public Professor(string nome, int matricula, Diretoria diretoria)
+  public Professor(string nome, long matricula, Diretoria diretoria)
   {
     this.nome = nome;
     this.matricula = matricula;
@@ -24,7 +24,7 @@ class Professor
     this.nome = nome;
   }
 
-  public void SetMatricula(int matricula)
+  public void SetMatricula(long matricula)
   {
     this.matricula = matricula;
   }
@@ -44,7 +44,7 @@ class Professor
     return nome;
   }
 
-  public int GetMatricula()
+  public long GetMatricula()
   {
     return matricula;
   }
