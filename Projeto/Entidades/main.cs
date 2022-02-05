@@ -10,56 +10,121 @@ class MainClass
   private static Naluno naluno = new Naluno();
   private static Nprofessor nprofessor = new Nprofessor();
   private static Nambiente nambiente = new Nambiente();
-  
+  private static Aluno alunologin = null;
+  private static Professor professorlogin = null;  
+
   static void Main(string[] args)
   {
+
+    //VARIAVEIS MENU
     int op = 0;
+    int perfil = 0;
+
+
+    //INICIO DO MENU
     Console.WriteLine("|-|-|- SISTEMA ACADEMICO -|-|-|");
     do
     {
       try{
-        op = Menu();
-        switch(op)
-        {
-          case 1: InstitutoInserir(); break;
-          case 2: InstitutoListar(); break;
-          case 3: InstitutoAtualizar(); break;
-          case 4: InstitutoExcluir(); break;
-          case 5: CampusInserir(); break;
-          case 6: CampusListar(); break;
-          case 7: CampusAtualizar(); break;
-          case 8: CampusExcluir(); break;
-          case 9: CursoInserir(); break;
-          case 10: CursoListar(); break;
-          case 11: CursoAtualizar(); break;
-          case 12: CursoExcluir(); break;
-          case 13: DiretoriaInserir(); break;
-          case 14: DiretoriaListar(); break;
-          case 15: DiretoriaAtualizar(); break;
-          case 16: DiretoriaExcluir(); break;
-          case 17: AlunoInserir(); break;
-          case 18: AlunoListar(); break;
-          case 19: AlunoAtualizar(); break;
-          case 20: AlunoExcluir(); break;
-          case 21: ProfessorInserir(); break;
-          case 22: ProfessorListar(); break;
-          case 23: ProfessorAtualizar(); break;
-          case 24: ProfessorExcluir(); break;
-          case 25: AmbienteInserir(); break;
-          case 26: AmbienteListar(); break;
-          case 27: AmbienteAtualizar(); break;
-          case 28: AmbienteExcluir(); break;             
-        }
-      }
-      catch(Exception erro){
-        Console.WriteLine(erro.Message);
-        op = 50;
-      }
+
+          //PERFIL USUARIO
+          if (perfil == 0)
+          {
+            op = 0;
+            perfil = MenuUsuario();  
+          }
+
+          //PERFIL ALUNO
+          if (perfil == 1 && alunologin == null)
+          {
+            op = MenuAlunoLogin();
+            switch(op)
+            {
+              case 1: AlunoLogin(); break;
+              case 99: perfil = 0; break;
+            }
+          }
+          if (perfil == 1 && alunologin != null)
+          {
+            op = MenuAlunoLogout();
+          } 
+
+          //PERFIL PROFESSOR
+          if (perfil == 2 && professorlogin == null)
+          {
+            op = MenuProfessorLogin(); 
+            switch(op)
+            {
+              case 1: ProfessorLogin(); break;
+              case 99: perfil = 0; break;
+            }                 
+          }
+          if (perfil == 2 && professorlogin != null)
+          {
+            op = MenuProfessorLogout();      
+          } 
+
+          //PERFIL COORDENAÇÃO
+          if (perfil == 3)
+          {
+            op = MenuCoordenacao();  
+            switch(op)
+            {
+              case 1: InstitutoInserir(); break;
+              case 2: InstitutoListar(); break;
+              case 3: InstitutoAtualizar(); break;
+              case 4: InstitutoExcluir(); break;
+              case 5: CampusInserir(); break;
+              case 6: CampusListar(); break;
+              case 7: CampusAtualizar(); break;
+              case 8: CampusExcluir(); break;
+              case 9: CursoInserir(); break;
+              case 10: CursoListar(); break;
+              case 11: CursoAtualizar(); break;
+              case 12: CursoExcluir(); break;
+              case 13: DiretoriaInserir(); break;
+              case 14: DiretoriaListar(); break;
+              case 15: DiretoriaAtualizar(); break;
+              case 16: DiretoriaExcluir(); break;
+              case 17: AlunoInserir(); break;
+              case 18: AlunoListar(); break;
+              case 19: AlunoAtualizar(); break;
+              case 20: AlunoExcluir(); break;
+              case 21: ProfessorInserir(); break;
+              case 22: ProfessorListar(); break;
+              case 23: ProfessorAtualizar(); break;
+              case 24: ProfessorExcluir(); break;
+              case 25: AmbienteInserir(); break;
+              case 26: AmbienteListar(); break;
+              case 27: AmbienteAtualizar(); break;
+              case 28: AmbienteExcluir(); break;         
+              case 99: perfil = 0; break;    
+            }        
+          } 
+        } 
+          catch(Exception erro)
+          {
+            Console.WriteLine(erro.Message);
+            op = 50;
+          }
     }while(op != 0);
     Console.WriteLine("Finalizado.");
+  }       
+
+  public static int MenuUsuario()
+  {
+    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("1 - Entrar como Aluno");
+    Console.WriteLine("2 - Entrar como Professor");
+    Console.WriteLine("3 - Entrar como Coordenação");    
+    Console.WriteLine("0 - Fim");
+    Console.WriteLine("Informe sua opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
   }
 
-  public static int Menu()
+  public static int MenuCoordenacao()
   {
     Console.WriteLine("\n==================MENU==================");
     Console.WriteLine("1 - Instituto Inserir");
@@ -89,13 +154,98 @@ class MainClass
     Console.WriteLine("25 - Ambiente Inserir");
     Console.WriteLine("26 - Ambiente Listar");
     Console.WriteLine("27 - Ambiente Atualizar");
-    Console.WriteLine("28 - Ambiente Excluir\n");     
+    Console.WriteLine("28 - Ambiente Excluir\n"); 
+    Console.WriteLine("99 - Logout\n");        
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
     Console.WriteLine();
     return op;
   }
+
+  public static int MenuAlunoLogout()
+  {
+    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("1 - Turma Listar");
+    Console.WriteLine("2 - Nota Listar");
+    Console.WriteLine("0 - Fim");
+    Console.WriteLine("Informe sua opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+  public static int MenuAlunoLogin()
+  {
+    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("01 - Login");
+    Console.WriteLine("99 - Voltar");
+    Console.WriteLine("0 - Fim");
+    Console.WriteLine("Informe sua opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }  
+
+  public static int MenuProfessorLogout()
+  {
+    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("1 - Turma Listar");
+    Console.WriteLine("2 - Aluno Listar");
+    Console.WriteLine("3 - Nota Inserir");
+    Console.WriteLine("0 - Fim");
+    Console.WriteLine("Informe sua opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }
+
+  public static int MenuProfessorLogin()
+  {
+    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("01 - Login");
+    Console.WriteLine("99 - Voltar");
+    Console.WriteLine("0 - Fim");
+    Console.WriteLine("Informe sua opção: ");
+    int op = int.Parse(Console.ReadLine());
+    Console.WriteLine();
+    return op;
+  }  
+  //FIM DO MENU 
+
+
+  //FUNÇÕES MAIN
+
+  public static void AlunoLogin()
+  {
+
+    Console.WriteLine("----- Login do Aluno -----");
+    AlunoListar();
+    Console.Write("Informe o código do aluno para logar");
+    int id = int.Parse(Console.ReadLine());
+    // Procura o aluno com esse id
+    alunologin = naluno.Listar(id);
+  }
+  public static void AlunoLogout()
+  {
+    Console.WriteLine("----- Logout do Aluno -----");
+    alunologin = null;
+  }
+
+  public static void ProfessorLogin()
+  {
+    Console.WriteLine("----- Login do Professor -----");
+    ProfessorListar();
+    Console.Write("Informe o código do professor para logar");
+    int id = int.Parse(Console.ReadLine());
+    // Procura o aluno com esse id
+    professorlogin = nprofessor.Listar(id);
+  }
+  public static void ProfessorLogout()
+  {
+    Console.WriteLine("----- Logout do Professor -----");
+    professorlogin = null;
+  }
+
 
   public static void InstitutoInserir()
   {
@@ -465,6 +615,10 @@ class MainClass
     Console.WriteLine("--> Listando alunos ");
     List<Aluno> alns = naluno.Listar();
     foreach(Aluno a in alns) Console.WriteLine(a);
+    if (alns.Count == 0)
+    { 
+      Console.WriteLine("Nenhum Aluno Cadastrado");
+    }
   }
 
   public static void AlunoAtualizar()
@@ -571,6 +725,10 @@ class MainClass
     Console.WriteLine("--> Listando Professores ");
     List<Professor> prfs = nprofessor.Listar();
     foreach(Professor p in prfs) Console.WriteLine(p);
+    if (prfs.Count == 0)
+    { 
+      Console.WriteLine("Nenhum Professor Cadastrado");
+    }
   }
 
   public static void ProfessorAtualizar()
