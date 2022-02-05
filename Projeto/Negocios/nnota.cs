@@ -16,6 +16,7 @@ class Nnota
 
     Aluno aluno = nota.GetAluno();
     aluno.NotaInserir(nota);
+   
   }
 
   public List<Nota> Listar()
@@ -39,6 +40,7 @@ class Nnota
 
     Aluno aluno = nota.GetAluno();
     aluno.NotaAtualizar(nota);
+  
   }
 
   public void Excluir(Nota nota)
@@ -47,5 +49,6 @@ class Nnota
 
     Aluno aluno = nota.GetAluno();
     aluno.NotaExcluir(nota);
+    
   }
 }

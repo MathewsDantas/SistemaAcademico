@@ -8,6 +8,7 @@ class Aluno
   private long matricula;
   private Diretoria diretoria;
   private List<Nota> notas = new List<Nota>();
+  private List<Turmadiario> turmas = new List<Turmadiario>();
 
   public Aluno(string nome,long matricula,Diretoria diretoria)
   {
@@ -84,6 +85,40 @@ class Aluno
   public void NotaExcluir(Nota nota)
   {
     if(nota != null) notas.Remove(nota);
+  }
+
+  public void TurmaInserir(Turmadiario turma)
+  {
+      turmas.Add(turma);
+  }
+
+  public List<Turmadiario> TurmaListar()
+  {
+    return turmas;
+  }
+
+  public Turmadiario TurmaListar(int id)
+  {
+    for(int j=0; j < turmas.Count; j++)
+      if(turmas[j].GetId() == id) return turmas[j];
+    return null;
+  }
+
+  public void TurmaAtualizar(Turmadiario turma)
+  {
+    Turmadiario turma_atual = TurmaListar(turma.GetId());
+    if(turma_atual == null) return;
+    
+    turma_atual.SetSemestre(turma.GetSemestre());
+    turma_atual.SetTurma(turma.GetTurma());
+    turma_atual.SetProfessor(turma.GetProfessor());
+    turma_atual.SetDisciplina(turma.GetDisciplina());
+    
+  }
+
+  public void TurmaExcluir(Turmadiario turma)
+  {
+    if(turma != null) turmas.Remove(turma);
   }
 
   public override string ToString()

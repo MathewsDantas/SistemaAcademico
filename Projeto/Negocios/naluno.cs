@@ -41,6 +41,10 @@ class Naluno
 
     Diretoria dir = aluno.GetDiretoria();
     dir.AlunoAtualizar(aluno);
+
+    List<Turmadiario> turmas = aluno.TurmaListar();
+    foreach(Turmadiario t in turmas)
+      t.AlunoAtualizar(aluno);
   }
 
   public void Excluir(Aluno aluno)
@@ -49,5 +53,9 @@ class Naluno
 
     Diretoria dir = aluno.GetDiretoria();
     dir.AlunoExcluir(aluno);
+
+    List<Turmadiario> turmas = aluno.TurmaListar();
+    foreach(Turmadiario t in turmas)
+      t.AlunoExcluir(aluno);
   }
 }

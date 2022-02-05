@@ -16,6 +16,8 @@ class Nhorario
 
     Ambiente ambiente = horario.GetAmbiente();
     ambiente.HorarioInserir(horario);
+    Turmadiario turma = horario.GetTurma();
+    turma.HorarioInserir(horario);
   }
 
   public List<Horario> Listar()
@@ -39,6 +41,9 @@ class Nhorario
 
     Ambiente ambiente = horario.GetAmbiente();
     ambiente.HorarioAtualizar(horario);
+
+    Turmadiario turma = horario.GetTurma();
+    turma.HorarioAtualizar(horario);
   }
 
   public void Excluir(Horario horario)
@@ -47,5 +52,7 @@ class Nhorario
 
     Ambiente ambiente = horario.GetAmbiente();
     ambiente.HorarioExcluir(horario);
+    Turmadiario turma = horario.GetTurma();
+    turma.HorarioExcluir(horario);
   }
 }
