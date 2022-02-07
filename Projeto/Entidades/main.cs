@@ -138,42 +138,24 @@ class MainClass
   public static int MenuCoordenacao()
   {
     Console.WriteLine("\n==================MENU COORDENAÇÃO==================");
-    Console.WriteLine("1 - Instituto Inserir");
-    Console.WriteLine("2 - Instituto Listar");
-    Console.WriteLine("3 - Instituto Atualizar");
-    Console.WriteLine("4 - Instituto Excluir \n");
-    Console.WriteLine("5 - Campus Inserir");
-    Console.WriteLine("6 - Campus Listar");
-    Console.WriteLine("7 - Campus Atualizar");
-    Console.WriteLine("8 - Campus Excluir \n");
-    Console.WriteLine("9 - Curso Inserir");
-    Console.WriteLine("10 - Curso Listar");
-    Console.WriteLine("11 - Curso Atualizar");
-    Console.WriteLine("12 - Curso Excluir\n");
-    Console.WriteLine("13 - Diretoria Inserir");
-    Console.WriteLine("14 - Diretoria Listar");
-    Console.WriteLine("15 - Diretoria Atualizar");
-    Console.WriteLine("16 - Diretoria Excluir\n");
-    Console.WriteLine("17 - Aluno Inserir");
-    Console.WriteLine("18 - Aluno Listar");
-    Console.WriteLine("19 - Aluno Atualizar");
-    Console.WriteLine("20 - Aluno Excluir\n");
-    Console.WriteLine("21 - Professor Inserir");
-    Console.WriteLine("22 - Professor Listar");
-    Console.WriteLine("23 - Professor Atualizar");
-    Console.WriteLine("24 - Professor Excluir\n");
-    Console.WriteLine("25 - Ambiente Inserir");
-    Console.WriteLine("26 - Ambiente Listar");
-    Console.WriteLine("27 - Ambiente Atualizar");
-    Console.WriteLine("28 - Ambiente Excluir\n");
-    Console.WriteLine("29 - Disciplina Inserir");
-    Console.WriteLine("30 - Disciplina Listar");
-    Console.WriteLine("31 - Disciplina Atualizar");
-    Console.WriteLine("32 - Disciplina Excluir\n");
-    Console.WriteLine("33 - Turma Inserir");
-    Console.WriteLine("34 - Turma Listar");
-    Console.WriteLine("35 - Turma Atualizar"); 
-    Console.WriteLine("36 - Turma Excluir");   
+    Console.WriteLine("1 - Instituto Inserir    19 - Aluno Atualizar");
+    Console.WriteLine("2 - Instituto Listar     20 - Aluno Excluir ");
+    Console.WriteLine("3 - Instituto Atualizar  21 - Professor Inserir        ");
+    Console.WriteLine("4 - Instituto Excluir    22 - Professor Listar    ");
+    Console.WriteLine("5 - Campus Inserir       23 - Professor Atualizar  ");
+    Console.WriteLine("6 - Campus Listar        24 - Professor Excluir");
+    Console.WriteLine("7 - Campus Atualizar     25 - Ambiente Inserir");
+    Console.WriteLine("8 - Campus Excluir       26 - Ambiente Listar");
+    Console.WriteLine("9 - Curso Inserir        27 - Ambiente Atualizar ");
+    Console.WriteLine("10 - Curso Listar        28 - Ambiente Excluir ");
+    Console.WriteLine("11 - Curso Atualizar     29 - Disciplina Inserir ");
+    Console.WriteLine("12 - Curso Excluir       30 - Disciplina Listar");
+    Console.WriteLine("13 - Diretoria Inserir   31 - Disciplina Atualizar");
+    Console.WriteLine("14 - Diretoria Listar    32 - Disciplina Excluir");
+    Console.WriteLine("15 - Diretoria Atualizar 33 - Turma Inserir ");
+    Console.WriteLine("16 - Diretoria Excluir   34 - Turma Listar");
+    Console.WriteLine("17 - Aluno Inserir       35 - Turma Atualizar");
+    Console.WriteLine("18 - Aluno Listar        36 - Turma Excluir");    
     Console.WriteLine("99 - Logout\n");        
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
@@ -519,16 +501,15 @@ class MainClass
     {
 
       Console.WriteLine("--> Inserindo diretoria: ");
-      Console.WriteLine("Informe o Id da diretoria");
-      int id = int.Parse(Console.ReadLine());
-      Console.WriteLine("Digite a descricao da diretoria");
+     
+      Console.WriteLine("Digite a descricao da diretoria: ");
       string descricao = Console.ReadLine();
 
       Instituto ins = CampusListar_returnI();
       Console.WriteLine("Informe o Id do campus para inserir a diretoria: ");
       int id_campus = int.Parse(Console.ReadLine());
       Campus cam = ins.CampusListar(id_campus);
-      Diretoria d = new Diretoria(id, descricao, cam);
+      Diretoria d = new Diretoria(descricao, cam);
       ndiretoria.Inserir(d);
       Console.WriteLine();
       Console.WriteLine("Deseja adicionar a diretoria em outro campus?\n SIM - 0\n NAO - 1");

@@ -11,9 +11,8 @@ class Diretoria
   private List<Professor> professores = new List<Professor>();
   private List<Ambiente> ambientes = new List<Ambiente>();
 
-  public Diretoria(int id, string descricao, Campus campus)
+  public Diretoria(string descricao, Campus campus)
   {
-    this.id = id;
     this.descricao = descricao;
     this.campus = campus;
     this.instituto = campus.GetInstituto();

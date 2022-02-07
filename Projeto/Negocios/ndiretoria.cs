@@ -11,6 +11,12 @@ class Ndiretoria
     {
       Array.Resize(ref diretorias, 2*diretorias.Length);
     }
+    int max = 0;
+    for(int i = 0; i<ndir; i++)
+      if(diretorias[i].GetId() > max) max = diretorias[i].GetId();
+    
+    d.SetId(max + 1);
+
     diretorias[ndir] = d;
     ndir++;
     Campus cam = d.GetCampus();
