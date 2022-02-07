@@ -106,8 +106,10 @@ class MainClass
               case 31: DisciplinaAtualizar(); break;
               case 32: DisciplinaExcluir(); break;
               case 33: TurmaInserir(); break;
-              case 34: TurmaListar(); break;         
-              case 99: perfil = 0; break;    
+              case 34: TurmaListar(); break;
+              case 35: TurmaAtualizar(); break;
+              case 36: TurmaExcluir(); break; case 99: perfil = 0; break;    
+
             }        
           } 
         } 
@@ -169,7 +171,9 @@ class MainClass
     Console.WriteLine("31 - Disciplina Atualizar");
     Console.WriteLine("32 - Disciplina Excluir\n");
     Console.WriteLine("33 - Turma Inserir");
-    Console.WriteLine("34 - Turma Listar");  
+    Console.WriteLine("34 - Turma Listar");
+    Console.WriteLine("35 - Turma Atualizar"); 
+    Console.WriteLine("36 - Turma Excluir");   
     Console.WriteLine("99 - Logout\n");        
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
@@ -1006,6 +1010,40 @@ class MainClass
     Console.WriteLine("--> Listando Turmas: ");
     List<Turmadiario> turm = nturmadiario.Listar();
     foreach(Turmadiario t in turm) Console.WriteLine(t);
-    if(turm.Count == 0) Console.WriteLine("Nenhuma disciplina cadastrada. ");
+    if(turm.Count == 0) Console.WriteLine("Nenhuma turma cadastrada. ");
   }
+
+  public static void TurmaAtualizar()
+  {
+    Console.WriteLine("--> Atualizando Turma: ");
+    TurmaListar();
+    Console.WriteLine("Insira o Id da Turma que deseja atualizar: ");
+    int id_turma = int.Parse(Console.ReadLine());
+    Console.WriteLine("Insira o semestre da turma(20xx.x):");
+    string semestre = Console.ReadLine();
+    Console.WriteLine("Informe a hora do inicio da aula: ");
+    int hora_inicio = int.Parse(Console.ReadLine());
+    Console.WriteLine("Informe a hora do fim da aula: ");
+    int hora_fim = int.Parse(Console.ReadLine());
+
+    DisciplinaListar();
+    Console.WriteLine("Informe o Id da disciplina para inserir a Turma: ");
+    int id_disc = int.Parse(Console.ReadLine());
+    Disciplina disciplina = ndisciplina.Listar(id_disc);
+
+    Turmadiario turma = new Turmadiario(semestre,hora_inicio,hora_fim, disciplina);
+    turma.SetId(id_turma);
+    nturmadiario.Atualizar(turma);
+  }
+
+  public static void TurmaExcluir()
+  {
+    Console.WriteLine("--> Excluindo Turma: ");
+    TurmaListar();
+    Console.WriteLine("Insira o Id da Turma que deseja Excluir: ");
+    int id_turma = int.Parse(Console.ReadLine());
+    Turmadiario turma = nturmadiario.Listar(id_turma);
+    nturmadiario.Excluir(turma);
+  }
+
 }
