@@ -5,13 +5,19 @@ class Ninstituto
   private Instituto[] institutos = new Instituto[5];
   private int ni;
 
-  public void Inserir(Instituto i)
+  public void Inserir(Instituto instituto)
   {
     if(ni == institutos.Length)
     {
       Array.Resize(ref institutos, 2*institutos.Length);
     }
-    institutos[ni] = i;
+    
+    int max = 0;
+    for(int i = 0; i<ni; i++)
+      if(institutos[i].GetId() > max) max = institutos[i].GetId();
+    
+    instituto.SetId(max + 1);
+    institutos[ni] = instituto;
     ni++;
   }
 

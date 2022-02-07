@@ -37,10 +37,11 @@ class Nturmadiario
     Turmadiario turma_atual = Listar(turma.GetId());
 
     turma_atual.SetSemestre(turma.GetSemestre());
-    turma_atual.SetTurma(turma.GetTurma());
     turma_atual.SetProfessor(turma.GetProfessor());
     turma_atual.SetDisciplina(turma.GetDisciplina());
-
+    turma_atual.SetHora_inicio(turma.GetHora_inicio());
+    turma_atual.SetHora_fim(turma.GetHora_fim());
+    
     Professor professor = turma.GetProfessor();
     professor.TurmaAtualizar(turma);
 

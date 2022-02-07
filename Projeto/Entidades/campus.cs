@@ -10,14 +10,9 @@ class Campus : IComparable
   private Diretoria[] diretorias = new Diretoria[1];
   private int ndir;
 
-  public Campus(int id,string descricao)
+  public Campus(string descricao,Instituto instituto) 
   {
-    this.id = id;
     this.descricao = descricao;
-  }
-
-  public Campus(int id,string descricao,Instituto instituto) : this(id,descricao)
-  {
     this.instituto = instituto;
   }
 

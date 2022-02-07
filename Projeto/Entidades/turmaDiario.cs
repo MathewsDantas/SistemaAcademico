@@ -4,26 +4,30 @@ using System.Collections.Generic;
 class Turmadiario
 {
   private int id;
-  private int semestre;
-  private string turma; //turma A 20211.1.01404.1V
+  private string semestre;// 2021.2
+  private int hora_inicio;
+  private int hora_fim;
   private Professor professor;
   private Disciplina disciplina;
+  private Ambiente ambiente;
   private List<Aluno> alunos = new List<Aluno>();
-  private List<Horario> horarios = new List<Horario>();
+
+  public Turmadiario(string semestre,int hora_inicio,int hora_fim,Disciplina disciplina)
+  {
+    this.semestre = semestre;
+    this.hora_inicio = hora_inicio;
+    this.hora_fim = hora_fim;
+    this.disciplina = disciplina;
+  }
 
   public void SetId(int id)
   {
     this.id = id;
   }
 
-  public void SetSemestre(int semestre)
+  public void SetSemestre(string semestre)
   {
     this.semestre = semestre;
-  }
-
-  public void SetTurma(string turma)
-  {
-    this.turma = turma;
   }
 
   public void SetProfessor(Professor professor)
@@ -36,21 +40,29 @@ class Turmadiario
     this.disciplina = disciplina;
   }
 
-  // fazer nota e horario
+  public void SetHora_inicio(int hora_inicio)
+  {
+    this.hora_inicio = hora_inicio;
+  }
+
+  public void SetHora_fim(int hora_fim)
+  {
+    this.hora_fim = hora_fim;
+  }
+
+  public void SetAmbiente(Ambiente ambiente)
+  {
+    this.ambiente = ambiente;
+  }
 
   public int GetId()
   {
     return id;
   }
 
-  public int GetSemestre()
+  public string GetSemestre()
   {
     return semestre;
-  }
-
-  public string GetTurma()
-  {
-    return turma;
   }
 
   public Professor GetProfessor()
@@ -61,6 +73,21 @@ class Turmadiario
   public Disciplina GetDisciplina()
   {
     return disciplina;
+  }
+
+  public int GetHora_inicio()
+  {
+    return hora_inicio;
+  }
+
+  public int GetHora_fim()
+  {
+    return hora_fim;
+  }
+
+  public Ambiente GetAmbiente()
+  {
+    return ambiente;
   }
 
   public void AlunoInserir(Aluno a)
@@ -93,38 +120,8 @@ class Turmadiario
     if(a != null) alunos.Remove(a);
   }
 
-  public void HorarioInserir(Horario horario)
-  {
-      horarios.Add(horario);
-  }
-
-  public List<Horario> HorarioListar()
-  {
-    return horarios;
-  }
-
-  public Horario HorarioListar(int id)
-  {
-    for(int j=0; j < horarios.Count; j++)
-      if(horarios[j].GetId() == id) return horarios[j];
-    return null;
-  }
-
-  public void HorarioAtualizar(Horario horario)
-  {
-    Horario horario_atual = HorarioListar(horario.GetId());
-    if(horario_atual == null) return;
-    horario_atual.SetDiasemana(horario.GetDiasemana());
-    horario_atual.SetHorario(horario.GetHorario());
-  }
-
-  public void HorarioExcluir(Horario horario)
-  {
-    if(horario != null) horarios.Remove(horario);
-  }
-
   public override string ToString()
   {
-    return "IdTurma: "+id+"- Turma: "+turma+"- Semestre: "+semestre+"°";
+    return "IdTurma: "+id+"- Disciplina: "+disciplina.GetDescricao()+"- Semestre: "+semestre+"- Inicio "+hora_inicio+"- Fim: "+hora_fim;
   }
 }

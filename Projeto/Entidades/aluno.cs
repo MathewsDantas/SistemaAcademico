@@ -110,10 +110,10 @@ class Aluno
     if(turma_atual == null) return;
     
     turma_atual.SetSemestre(turma.GetSemestre());
-    turma_atual.SetTurma(turma.GetTurma());
     turma_atual.SetProfessor(turma.GetProfessor());
     turma_atual.SetDisciplina(turma.GetDisciplina());
-    
+    turma_atual.SetHora_inicio(turma.GetHora_inicio());
+    turma_atual.SetHora_fim(turma.GetHora_fim());
   }
 
   public void TurmaExcluir(Turmadiario turma)

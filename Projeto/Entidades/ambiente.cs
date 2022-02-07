@@ -6,7 +6,7 @@ class Ambiente
   private int id;
   private string espaco;
   private Diretoria diretoria;
-  private List<Horario> horarios = new List<Horario>();
+  private List<Turmadiario> turmas = new List<Turmadiario>();
 
   public Ambiente(string espaco, Diretoria diretoria)
   {
@@ -44,34 +44,38 @@ class Ambiente
     return diretoria;
   }
 
-  public void HorarioInserir(Horario horario)
+  public void TurmaInserir(Turmadiario turma)
   {
-      horarios.Add(horario);
+      turmas.Add(turma);
   }
 
-  public List<Horario> HorarioListar()
+  public List<Turmadiario> TurmaListar()
   {
-    return horarios;
+    return turmas;
   }
 
-  public Horario HorarioListar(int id)
+  public Turmadiario TurmaListar(int id)
   {
-    for(int j=0; j < horarios.Count; j++)
-      if(horarios[j].GetId() == id) return horarios[j];
+    for(int j=0; j < turmas.Count; j++)
+      if(turmas[j].GetId() == id) return turmas[j];
     return null;
   }
 
-  public void HorarioAtualizar(Horario horario)
+  public void TurmaAtualizar(Turmadiario turma)
   {
-    Horario horario_atual = HorarioListar(horario.GetId());
-    if(horario_atual == null) return;
-    horario_atual.SetDiasemana(horario.GetDiasemana());
-    horario_atual.SetHorario(horario.GetHorario());
+    Turmadiario turma_atual = TurmaListar(turma.GetId());
+    if(turma_atual == null) return;
+    
+    turma_atual.SetSemestre(turma.GetSemestre());
+    turma_atual.SetProfessor(turma.GetProfessor());
+    turma_atual.SetDisciplina(turma.GetDisciplina());
+    turma_atual.SetHora_inicio(turma.GetHora_inicio());
+    turma_atual.SetHora_fim(turma.GetHora_fim());
   }
 
-  public void HorarioExcluir(Horario horario)
+  public void TurmaExcluir(Turmadiario turma)
   {
-    if(horario != null) horarios.Remove(horario);
+    if(turma != null) turmas.Remove(turma);
   }
 
   public override string ToString()

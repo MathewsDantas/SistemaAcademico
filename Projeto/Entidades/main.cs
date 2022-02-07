@@ -10,6 +10,9 @@ class MainClass
   private static Naluno naluno = new Naluno();
   private static Nprofessor nprofessor = new Nprofessor();
   private static Nambiente nambiente = new Nambiente();
+  private static Ndisciplina ndisciplina = new Ndisciplina();
+  private static Nturmadiario nturmadiario = new Nturmadiario();
+
   private static Aluno alunologin = null;
   private static Professor professorlogin = null;  
 
@@ -97,7 +100,13 @@ class MainClass
               case 25: AmbienteInserir(); break;
               case 26: AmbienteListar(); break;
               case 27: AmbienteAtualizar(); break;
-              case 28: AmbienteExcluir(); break;         
+              case 28: AmbienteExcluir(); break;
+              case 29: DisciplinaInserir(); break;
+              case 30: DisciplinaListar(); break;
+              case 31: DisciplinaAtualizar(); break;
+              case 32: DisciplinaExcluir(); break;
+              case 33: TurmaInserir(); break;
+              case 34: TurmaListar(); break;         
               case 99: perfil = 0; break;    
             }        
           } 
@@ -113,7 +122,7 @@ class MainClass
 
   public static int MenuUsuario()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n===============MENU================");
     Console.WriteLine("1 - Entrar como Aluno");
     Console.WriteLine("2 - Entrar como Professor");
     Console.WriteLine("3 - Entrar como Coordenação");    
@@ -126,7 +135,7 @@ class MainClass
 
   public static int MenuCoordenacao()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n==================MENU COORDENAÇÃO==================");
     Console.WriteLine("1 - Instituto Inserir");
     Console.WriteLine("2 - Instituto Listar");
     Console.WriteLine("3 - Instituto Atualizar");
@@ -154,7 +163,13 @@ class MainClass
     Console.WriteLine("25 - Ambiente Inserir");
     Console.WriteLine("26 - Ambiente Listar");
     Console.WriteLine("27 - Ambiente Atualizar");
-    Console.WriteLine("28 - Ambiente Excluir\n"); 
+    Console.WriteLine("28 - Ambiente Excluir\n");
+    Console.WriteLine("29 - Disciplina Inserir");
+    Console.WriteLine("30 - Disciplina Listar");
+    Console.WriteLine("31 - Disciplina Atualizar");
+    Console.WriteLine("32 - Disciplina Excluir\n");
+    Console.WriteLine("33 - Turma Inserir");
+    Console.WriteLine("34 - Turma Listar");  
     Console.WriteLine("99 - Logout\n");        
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
@@ -165,7 +180,7 @@ class MainClass
 
   public static int MenuAlunoLogout()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n==================MENU ALUNO==================");
     Console.WriteLine("1 - Turma Listar");
     Console.WriteLine("2 - Nota Listar");
     Console.WriteLine("0 - Fim");
@@ -177,7 +192,7 @@ class MainClass
   public static int MenuAlunoLogin()
   {
     Console.WriteLine("\n==================MENU==================");
-    Console.WriteLine("01 - Login");
+    Console.WriteLine("1 - Login");
     Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
@@ -188,7 +203,7 @@ class MainClass
 
   public static int MenuProfessorLogout()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n==================MENU PROFESSOR==================");
     Console.WriteLine("1 - Turma Listar");
     Console.WriteLine("2 - Aluno Listar");
     Console.WriteLine("3 - Nota Inserir");
@@ -202,7 +217,7 @@ class MainClass
   public static int MenuProfessorLogin()
   {
     Console.WriteLine("\n==================MENU==================");
-    Console.WriteLine("01 - Login");
+    Console.WriteLine("1 - Login");
     Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
@@ -250,12 +265,11 @@ class MainClass
   public static void InstitutoInserir()
   {
     Console.WriteLine("--> Inserindo Instituto: ");
-    Console.WriteLine("Informe o Id do instituto: ");
-    int id = int.Parse(Console.ReadLine());
+    
     Console.WriteLine("Informe a descricao do instituto: ");
     string descricao = Console.ReadLine();
     
-    Instituto i = new Instituto(id,descricao);
+    Instituto i = new Instituto(descricao);
     ninstituto.Inserir(i);
   }
 
@@ -281,7 +295,8 @@ class MainClass
     Console.WriteLine("Informe uma descricao: ");
     string descricao = Console.ReadLine();
 
-    Instituto i = new Instituto(id,descricao);
+    Instituto i = new Instituto(descricao);
+    i.SetId(id);
     ninstituto.Atualizar(i);
     Console.WriteLine();
   }
@@ -302,8 +317,7 @@ class MainClass
   public static void CampusInserir()
   {
     Console.WriteLine("--> Inserindo campus: ");
-    Console.WriteLine("Informe o Id do campus: ");
-    int id = int.Parse(Console.ReadLine());
+    
     Console.WriteLine("Informe a descricao do campus: ");
     string descricao = Console.ReadLine();
     InstitutoListar();
@@ -311,7 +325,7 @@ class MainClass
     int idinstituto = int.Parse(Console.ReadLine());
   
     Instituto i = ninstituto.Listar(idinstituto);
-    Campus c = new Campus(id,descricao,i);
+    Campus c = new Campus(descricao,i);
     ncampus.Inserir(c);
     Console.WriteLine();
   }
@@ -406,8 +420,7 @@ class MainClass
     int aux = 0;
     
     Console.WriteLine("--> Inserindo curso: ");
-    Console.WriteLine("Informe o Id do curso: ");
-    int id = int.Parse(Console.ReadLine());
+   
     Console.WriteLine("Digite a descricao do curso: ");
     string descricao = Console.ReadLine();
 
@@ -425,7 +438,7 @@ class MainClass
       Console.WriteLine("Informe o Id do campus para inserir o curso: ");
       int id_Cam = int.Parse(Console.ReadLine());
       Campus cam = ins.CampusListar(id_Cam);
-      Curso c = new Curso(id,descricao,ins,cam);
+      Curso c = new Curso(descricao,ins,cam);
       ncurso.Inserir(c);
       Console.WriteLine();
       Console.WriteLine("Deseja adicionar o curso em outro campus?\n SIM - 0\n NAO - 1");
@@ -561,7 +574,7 @@ class MainClass
     
   }
 
-    public static void DiretoriaAtualizar()
+  public static void DiretoriaAtualizar()
   {
     Instituto ins = CampusListar_returnI();
     
@@ -912,4 +925,87 @@ class MainClass
     nambiente.Excluir(amb);
   }
   
+  public static void DisciplinaInserir()
+  {
+    Console.WriteLine("--> Inserindo Disciplina: ");
+
+    Console.WriteLine("Digite a descricao da Disciplina: ");
+    string descricao = Console.ReadLine();
+    Console.WriteLine("\nDigite o periodo(Vesp/Matu) da Disciplina: ");
+    string periodo = Console.ReadLine();
+    
+    CursoListar();
+    Console.WriteLine("\nInforme o Id do curso para inserir a Disciplina: ");
+    int id_cur = int.Parse(Console.ReadLine());
+    Curso curso = ncurso.Listar(id_cur);
+
+    Disciplina disc = new Disciplina(descricao,periodo,curso);
+    ndisciplina.Inserir(disc);
+  }
+
+  public static void DisciplinaListar()
+  {
+    Console.WriteLine("--> Listando Disciplinas: ");
+    List<Disciplina> disc = ndisciplina.Listar();
+    foreach(Disciplina d in disc) Console.WriteLine(d);
+    if(disc.Count == 0) Console.WriteLine("Nenhuma disciplina cadastrada. ");
+  }
+
+  public static void DisciplinaAtualizar()
+  {
+    Console.WriteLine("--> Atualizando Disciplina: ");
+    DisciplinaListar();
+    Console.WriteLine("Insira o Id da Disciplina que deseja atualizar: ");
+    int id_disc = int.Parse(Console.ReadLine());
+    Console.WriteLine("Digite a nova descricao da Disciplina: ");
+    string descricao = Console.ReadLine();
+    Console.WriteLine("Digite o novo periodo(Vesp/Matu) da Disciplina: ");
+    string periodo = Console.ReadLine();
+
+    CursoListar();
+    Console.WriteLine("Informe o Id do curso para inserir a Disciplina: ");
+    int id_cur = int.Parse(Console.ReadLine());
+    Curso curso = ncurso.Listar(id_cur);
+
+    Disciplina disciplina = new Disciplina(descricao,periodo,curso);
+    disciplina.SetId(id_disc);
+    ndisciplina.Atualizar(disciplina);
+  }
+
+  public static void DisciplinaExcluir()
+  {
+    Console.WriteLine("--> Excluindo Disciplina: ");
+    DisciplinaListar();
+    Console.WriteLine("Insira o Id da Disciplina que deseja Excluir: ");
+    int id_disc = int.Parse(Console.ReadLine());
+    Disciplina disciplina = ndisciplina.Listar(id_disc);
+    ndisciplina.Excluir(disciplina);
+  }
+  
+
+  public static void TurmaInserir()
+  {
+    Console.WriteLine("--> Inserindo Turmas: ");
+    DisciplinaListar();
+    Console.WriteLine("Informe o Id da Disciplina em que deseja criar uma turma: ");
+    int id_disc = int.Parse(Console.ReadLine());
+    Console.WriteLine("Insira o semestre da turma(20xx.x):");
+    string semestre = Console.ReadLine();
+    Console.WriteLine("Informe a hora do inicio da aula: ");
+    int hora_inicio = int.Parse(Console.ReadLine());
+    Console.WriteLine("Informe a hora do fim da aula: ");
+    int hora_fim = int.Parse(Console.ReadLine());
+
+    Disciplina disciplina = ndisciplina.Listar(id_disc);
+    Turmadiario turma = new Turmadiario(semestre,hora_inicio,hora_fim,disciplina);
+    nturmadiario.Inserir(turma);
+  }
+
+  public static void TurmaListar()
+  {
+    Console.WriteLine("--> Listando Turmas: ");
+    List<Turmadiario> turm = nturmadiario.Listar();
+    foreach(Turmadiario t in turm) Console.WriteLine(t);
+    if(turm.Count == 0) Console.WriteLine("Nenhuma disciplina cadastrada. ");
+  }
 }

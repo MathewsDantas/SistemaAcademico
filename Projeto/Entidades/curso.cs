@@ -10,12 +10,16 @@ class Curso
   private Campus campus;
   private List<Disciplina> disciplinas = new List<Disciplina>();
 
-  public Curso(int id,string descricao,Instituto instituto,Campus campus)
+  public Curso(string descricao,Instituto instituto,Campus campus)
   {
-    this.id = id;
     this.descricao = descricao;
     this.instituto = instituto;
     this.campus = campus;
+  }
+
+  public void SetId(int id)
+  {
+    this.id = id;
   }
 
   public void SetDescricao(string descricao)

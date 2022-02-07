@@ -11,11 +11,18 @@ class Ncampus
     {
       Array.Resize(ref campus,2*campus.Length);
     }
+
+    int max = 0;
+    for(int i = 0; i<nc; i++)
+      if(campus[i].GetId() > max) max = campus[i].GetId();
+    
+    c.SetId(max + 1);
+
     campus[nc] = c;
     nc++;
 
-    Instituto i = c.GetInstituto();
-    if(i != null) i.CampusInserir(c);
+    Instituto ins = c.GetInstituto();
+    if(ins != null) ins.CampusInserir(c);
   }
   
   public Campus[] Listar()

@@ -11,12 +11,18 @@ class Ncurso
     {
       Array.Resize(ref cursos, 2*cursos.Length);
     }
+    int max = 0;
+    for(int i = 0; i<ncur; i++)
+      if(cursos[i].GetId() > max) max = cursos[i].GetId();
+    
+    c.SetId(max + 1);
+
     cursos[ncur] = c;
     ncur++;
 
-    Instituto i = c.GetInstituto();
+    Instituto ins = c.GetInstituto();
     Campus cam = c.GetCampus();
-    i.CursoInserir(c);
+    ins.CursoInserir(c);
     cam.CursoInserir(c);
   }
 
@@ -25,6 +31,14 @@ class Ncurso
     Curso[] c = new Curso[ncur];
     Array.Copy(cursos,c,ncur);
     return c;
+  }
+
+  public Curso Listar(int id)
+  {
+    for(int i = 0; i<ncur; i++)
+      if(cursos[i].GetId() == id) return cursos[i];
+    
+    return null;
   }
 
   public void Atualizar(Curso c_velho,string descricao_nova)

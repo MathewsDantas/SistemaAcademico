@@ -10,9 +10,8 @@ class Instituto
   private Curso[] cursos = new Curso[1];
   private int ncur;
 
-  public Instituto(int id, string descricao)
+  public Instituto(string descricao)
   {
-    this.id = id;
     this.descricao = descricao;
   }
 

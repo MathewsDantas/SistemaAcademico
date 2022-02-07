@@ -5,13 +5,12 @@ class Disciplina
 {
   private int id;
   private string descricao;
-  private string periodo;
+  private string periodo;//vespertino
   private Curso curso;
   private List<Turmadiario> turmas = new List<Turmadiario>();
 
-  public Disciplina(int id, string descricao, string periodo, Curso curso)
+  public Disciplina(string descricao, string periodo, Curso curso)
   {
-    this.id = id;
     this.descricao = descricao;
     this.periodo = periodo;
     this.curso = curso;
@@ -73,10 +72,10 @@ class Disciplina
     if(turma_atual == null) return;
     
     turma_atual.SetSemestre(turma.GetSemestre());
-    turma_atual.SetTurma(turma.GetTurma());
     turma_atual.SetProfessor(turma.GetProfessor());
     turma_atual.SetDisciplina(turma.GetDisciplina());
-    
+    turma_atual.SetHora_inicio(turma.GetHora_inicio());
+    turma_atual.SetHora_fim(turma.GetHora_fim());
   }
 
   public void TurmaExcluir(Turmadiario turma)
