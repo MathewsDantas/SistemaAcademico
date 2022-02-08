@@ -50,6 +50,11 @@ class MainClass
           if (perfil == 1 && alunologin != null)
           {
             op = MenuAlunoLogout();
+            switch(op)
+            {
+              case 1: ListarTurmasAluno(); break;
+              case 99: perfil = 0; break;
+            }
           } 
 
           //PERFIL PROFESSOR
@@ -109,7 +114,9 @@ class MainClass
               case 34: TurmaListar(); break;
               case 35: TurmaAtualizar(); break;
               case 36: TurmaExcluir(); break;
-              case 37: TurmaCadastroAluno(); break; 
+              case 37: TurmaCadastroAluno(); break;
+              case 38: TurmaCadastroProfessor(); break;
+              case 39: TurmaCadastroAmbiente(); break; 
               case 99: perfil = 0; break;    
             }        
           } 
@@ -159,6 +166,8 @@ class MainClass
     Console.WriteLine("17 - Aluno Inserir       35 - Turma Atualizar");
     Console.WriteLine("18 - Aluno Listar        36 - Turma Excluir\n");
     Console.WriteLine("                         37 - Novo Aluno na turma");
+    Console.WriteLine("                         38 - Novo Professor na turma");
+    Console.WriteLine("                         39 - Novo Ambiente na turma");        
     Console.WriteLine("99 - Logout");        
     Console.WriteLine("0 - Fim");
     Console.WriteLine("----------------------------------------------------");
@@ -229,7 +238,7 @@ class MainClass
 
     Console.WriteLine("----- Login do Aluno -----");
     AlunoListar();
-    Console.Write("Informe o código do aluno para logar");
+    Console.Write("Informe o código do aluno para logar:");
     int id = int.Parse(Console.ReadLine());
     // Procura o aluno com esse id
     alunologin = naluno.Listar(id);
@@ -239,12 +248,16 @@ class MainClass
     Console.WriteLine("----- Logout do Aluno -----");
     alunologin = null;
   }
+  public static void ListarTurmasAluno()
+  {
+    
+  }
 
   public static void ProfessorLogin()
   {
     Console.WriteLine("----- Login do Professor -----");
     ProfessorListar();
-    Console.Write("Informe o código do professor para logar");
+    Console.Write("Informe o código do professor para logar:");
     int id = int.Parse(Console.ReadLine());
     // Procura o aluno com esse id
     professorlogin = nprofessor.Listar(id);
@@ -1043,7 +1056,7 @@ class MainClass
   {
     Console.WriteLine("--> Inserindo Aluno na Turma: ");
     DiretoriaListar();
-    Console.WriteLine("Informe o Id da diretoria em que o aluno está: ");
+    Console.WriteLine("Informe o Id da diretoria em que o aluno esta cadastrado: ");
     int id_diretoria = int.Parse(Console.ReadLine());
     Diretoria diretoria = ndiretoria.Listar(id_diretoria);
     Console.WriteLine("----------------------------------------------------");
@@ -1054,10 +1067,50 @@ class MainClass
     int id_aluno = int.Parse(Console.ReadLine());
     Aluno aluno = diretoria.AlunoListar(id_aluno);
     TurmaListar();
-    Console.WriteLine("Informe o Id da turma que deseja inserir o {aluno.GetNome()}: ");
+    Console.WriteLine($"Informe o Id da turma que deseja inserir o aluno: {aluno.GetNome()}: ");
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turma = nturmadiario.Listar(id_turma);
     turma.SetAluno(aluno);
   }
 
+  public static void TurmaCadastroProfessor()
+  {
+    Console.WriteLine("--> Inserindo Professor na Turma: ");
+    DiretoriaListar();
+    Console.WriteLine("Informe o Id da diretoria em que o professor esta cadastrado: ");
+    int id_diretoria = int.Parse(Console.ReadLine());
+    Diretoria diretoria = ndiretoria.Listar(id_diretoria);
+    Console.WriteLine("----------------------------------------------------");
+    List<Professor> professores = diretoria.ProfessorListar();
+    foreach(Professor p in professores) Console.WriteLine(p);
+    Console.WriteLine("----------------------------------------------------");
+    Console.WriteLine("Escolha o Id do professor para inserir na turma: ");
+    int id_professor = int.Parse(Console.ReadLine());
+    Professor professor = diretoria.ProfessorListar(id_professor);
+    TurmaListar();
+    Console.WriteLine($"Informe o Id da turma que deseja inserir o professor: {professor.GetNome()}: ");
+    int id_turma = int.Parse(Console.ReadLine());
+    Turmadiario turma = nturmadiario.Listar(id_turma);
+    turma.SetProfessor(professor);
+  }
+  public static void TurmaCadastroAmbiente()
+  {
+    Console.WriteLine("--> Inserindo Ambiente na Turma: ");
+    DiretoriaListar();
+    Console.WriteLine("Informe o Id da diretoria em que o ambiente esta cadastrado: ");
+    int id_diretoria = int.Parse(Console.ReadLine());
+    Diretoria diretoria = ndiretoria.Listar(id_diretoria);
+    Console.WriteLine("----------------------------------------------------");
+    List<Ambiente> ambientes = diretoria.AmbienteListar();
+    foreach(Ambiente a in ambientes) Console.WriteLine(a);
+    Console.WriteLine("----------------------------------------------------");
+    Console.WriteLine("Escolha o Id do Ambiente para inserir na turma: ");
+    int id_ambiente = int.Parse(Console.ReadLine());
+    Ambiente ambiente = diretoria.AmbienteListar(id_ambiente);
+    TurmaListar();
+    Console.WriteLine($"Informe o Id da turma que deseja inserir o ambiente: {ambiente.GetEspaco()}: ");
+    int id_turma = int.Parse(Console.ReadLine());
+    Turmadiario turma = nturmadiario.Listar(id_turma);
+    turma.SetAmbiente(ambiente);
+  }
 }
