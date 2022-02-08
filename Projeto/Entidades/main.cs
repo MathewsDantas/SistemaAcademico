@@ -53,7 +53,7 @@ class MainClass
             switch(op)
             {
               case 1: ListarTurmasAluno(); break;
-              case 99: perfil = 0; break;
+              case 99: AlunoLogout(); break;
             }
           } 
 
@@ -64,12 +64,18 @@ class MainClass
             switch(op)
             {
               case 1: ProfessorLogin(); break;
-              case 99: perfil = 0; break;
+              case 99: ProfessorLogout(); break;
             }                 
           }
           if (perfil == 2 && professorlogin != null)
           {
-            op = MenuProfessorLogout();      
+            op = MenuProfessorLogout();   
+            switch(op)
+            {
+              case 1: ListarTurmasProfessor(); break;
+              case 99: perfil = 0; break;
+            }
+            
           } 
 
           //PERFIL COORDENAÇÃO
@@ -179,9 +185,10 @@ class MainClass
 
   public static int MenuAlunoLogout()
   {
-    Console.WriteLine("\n==================MENU ALUNO==================");
+    Console.WriteLine($"\n================== BEM VINDO {alunologin.GetNome()}==================");
     Console.WriteLine("1 - Turma Listar");
     Console.WriteLine("2 - Nota Listar");
+    Console.WriteLine("99 - Logout");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("Informe sua opção: ");
     int op = int.Parse(Console.ReadLine());
@@ -191,7 +198,7 @@ class MainClass
   }
   public static int MenuAlunoLogin()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n================== MENU ALUNO ==================");
     Console.WriteLine("1 - Login");
     Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Fim");
@@ -204,10 +211,11 @@ class MainClass
 
   public static int MenuProfessorLogout()
   {
-    Console.WriteLine("\n==================MENU PROFESSOR==================");
+    Console.WriteLine("\n==================BEM VINDO {professorlogin.GetNome()}==================");
     Console.WriteLine("1 - Turma Listar");
     Console.WriteLine("2 - Aluno Listar");
     Console.WriteLine("3 - Nota Inserir");
+    Console.WriteLine("99 - Logout");
     Console.WriteLine("0 - Fim");
     Console.WriteLine("------------------------------------------");
     Console.WriteLine("Informe sua opção: ");
@@ -218,7 +226,7 @@ class MainClass
 
   public static int MenuProfessorLogin()
   {
-    Console.WriteLine("\n==================MENU==================");
+    Console.WriteLine("\n================== MENU PROFESSOR ==================");
     Console.WriteLine("1 - Login");
     Console.WriteLine("99 - Voltar");
     Console.WriteLine("0 - Fim");
@@ -248,9 +256,15 @@ class MainClass
     Console.WriteLine("----- Logout do Aluno -----");
     alunologin = null;
   }
+
   public static void ListarTurmasAluno()
   {
-    
+    List<Turmadiario> turmas = alunologin.TurmaListar();
+    Console.WriteLine($"--> Listando turmas do professor {alunologin.GetNome()}:");
+    Console.WriteLine("------------------------------------------------");
+    foreach(Turmadiario t in turmas) Console.WriteLine(t);
+    if(turmas.Count == 0) Console.WriteLine("Aluno sem turmas.");
+    Console.WriteLine("------------------------------------------------");
   }
 
   public static void ProfessorLogin()
@@ -262,10 +276,21 @@ class MainClass
     // Procura o aluno com esse id
     professorlogin = nprofessor.Listar(id);
   }
+
   public static void ProfessorLogout()
   {
     Console.WriteLine("----- Logout do Professor -----");
     professorlogin = null;
+  }
+
+  public static void ListarTurmasProfessor()
+  {
+    List<Turmadiario> turmas = professorlogin.TurmaListar();
+    Console.WriteLine($"--> Listando turmas do professor {professorlogin.GetNome()}:");
+    Console.WriteLine("------------------------------------------------");
+    foreach(Turmadiario t in turmas) Console.WriteLine(t);
+    if(turmas.Count == 0) Console.WriteLine("Professor sem turmas.");
+    Console.WriteLine("------------------------------------------------");
   }
 
 
@@ -1070,7 +1095,8 @@ class MainClass
     Console.WriteLine($"Informe o Id da turma que deseja inserir o aluno: {aluno.GetNome()}: ");
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turma = nturmadiario.Listar(id_turma);
-    turma.SetAluno(aluno);
+    turma.AlunoInserir(aluno);
+    aluno.TurmaInserir(turma);
   }
 
   public static void TurmaCadastroProfessor()
@@ -1092,6 +1118,7 @@ class MainClass
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turma = nturmadiario.Listar(id_turma);
     turma.SetProfessor(professor);
+    professor.TurmaInserir(turma);
   }
   public static void TurmaCadastroAmbiente()
   {
@@ -1112,5 +1139,6 @@ class MainClass
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turma = nturmadiario.Listar(id_turma);
     turma.SetAmbiente(ambiente);
+    ambiente.TurmaInserir(turma);
   }
 }
