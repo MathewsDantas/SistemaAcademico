@@ -13,8 +13,6 @@ class Nturmadiario
 
     turma.SetId(max + 1);
     turmas.Add(turma);
-    Professor professor = turma.GetProfessor();
-    professor.TurmaInserir(turma);
 
     Disciplina disciplina = turma.GetDisciplina();
     disciplina.TurmaInserir(turma);
@@ -42,8 +40,6 @@ class Nturmadiario
     turma_atual.SetHora_inicio(turma.GetHora_inicio());
     turma_atual.SetHora_fim(turma.GetHora_fim());
     
-    Professor professor = turma.GetProfessor();
-    professor.TurmaAtualizar(turma);
 
     Disciplina disciplina = turma.GetDisciplina();
     disciplina.TurmaAtualizar(turma);

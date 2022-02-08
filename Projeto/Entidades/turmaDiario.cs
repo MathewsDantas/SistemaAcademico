@@ -40,6 +40,11 @@ class Turmadiario
     this.disciplina = disciplina;
   }
 
+  public void SetAluno(Aluno aluno)
+  {
+    this.alunos.Add(aluno);
+  }
+
   public void SetHora_inicio(int hora_inicio)
   {
     this.hora_inicio = hora_inicio;
@@ -122,6 +127,6 @@ class Turmadiario
 
   public override string ToString()
   {
-    return "IdTurma: "+id+"- Disciplina: "+disciplina.GetDescricao()+"- Semestre: "+semestre+"- Inicio "+hora_inicio+"- Fim: "+hora_fim;
+    return "IdTurma:"+id+" - Disciplina:"+disciplina.GetDescricao()+" - Semestre:"+semestre+" - Inicio:"+hora_inicio+" - Fim:"+hora_fim;
   }
 }

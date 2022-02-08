@@ -38,6 +38,14 @@ class Ndiretoria
     return -1;
   }
 
+  public Diretoria Listar(int id)
+  {
+    for(int i = 0; i<ndir; i++)
+      if(diretorias[i].GetId() == id) return diretorias[i];
+    
+    return null;
+  }
+
   public void Excluir(Diretoria d)
   {
     int n = Indice(d);
@@ -60,9 +68,5 @@ class Ndiretoria
     d_velha.GetCampus().DiretoriaAtualizar(d_velha); // adiciona o novo curso ao campus
   }
   
-  
-  
-
-
 
 }
