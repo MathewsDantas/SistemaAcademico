@@ -64,7 +64,7 @@ class MainClass
             switch(op)
             {
               case 1: ProfessorLogin(); break;
-              case 99: ProfessorLogout(); break;
+              case 99: perfil = 0; break;
             }                 
           }
           if (perfil == 2 && professorlogin != null)
@@ -73,7 +73,7 @@ class MainClass
             switch(op)
             {
               case 1: ListarTurmasProfessor(); break;
-              case 99: perfil = 0; break;
+              case 99: ProfessorLogout(); break;
             }
             
           } 
@@ -196,6 +196,7 @@ class MainClass
     Console.WriteLine();
     return op;
   }
+
   public static int MenuAlunoLogin()
   {
     Console.WriteLine("\n================== MENU ALUNO ==================");
@@ -209,9 +210,36 @@ class MainClass
     return op;
   }  
 
+  public static void AlunoLogin()
+  {
+
+    Console.WriteLine("----- Login do Aluno -----");
+    AlunoListar();
+    Console.Write("Informe o código do aluno para logar:");
+    int id = int.Parse(Console.ReadLine());
+    // Procura o aluno com esse id
+    alunologin = naluno.Listar(id);
+  }
+
+  public static void AlunoLogout()
+  {
+    Console.WriteLine("----- Logout do Aluno -----");
+    alunologin = null;
+  }
+
+  public static void ListarTurmasAluno()
+  {
+    List<Turmadiario> turmas = alunologin.TurmaListar();
+    Console.WriteLine($"--> Listando turmas do professor {alunologin.GetNome()}:");
+    Console.WriteLine("------------------------------------------------");
+    foreach(Turmadiario t in turmas) Console.WriteLine(t);
+    if(turmas.Count == 0) Console.WriteLine("Aluno sem turmas.");
+    Console.WriteLine("------------------------------------------------");
+  }
+
   public static int MenuProfessorLogout()
   {
-    Console.WriteLine("\n==================BEM VINDO {professorlogin.GetNome()}==================");
+    Console.WriteLine($"\n==================BEM VINDO {professorlogin.GetNome()}==================");
     Console.WriteLine("1 - Turma Listar");
     Console.WriteLine("2 - Aluno Listar");
     Console.WriteLine("3 - Nota Inserir");
@@ -235,36 +263,6 @@ class MainClass
     int op = int.Parse(Console.ReadLine());
     Console.WriteLine();
     return op;
-  }  
-  //FIM DO MENU 
-
-
-  //FUNÇÕES MAIN
-
-  public static void AlunoLogin()
-  {
-
-    Console.WriteLine("----- Login do Aluno -----");
-    AlunoListar();
-    Console.Write("Informe o código do aluno para logar:");
-    int id = int.Parse(Console.ReadLine());
-    // Procura o aluno com esse id
-    alunologin = naluno.Listar(id);
-  }
-  public static void AlunoLogout()
-  {
-    Console.WriteLine("----- Logout do Aluno -----");
-    alunologin = null;
-  }
-
-  public static void ListarTurmasAluno()
-  {
-    List<Turmadiario> turmas = alunologin.TurmaListar();
-    Console.WriteLine($"--> Listando turmas do professor {alunologin.GetNome()}:");
-    Console.WriteLine("------------------------------------------------");
-    foreach(Turmadiario t in turmas) Console.WriteLine(t);
-    if(turmas.Count == 0) Console.WriteLine("Aluno sem turmas.");
-    Console.WriteLine("------------------------------------------------");
   }
 
   public static void ProfessorLogin()
@@ -282,6 +280,11 @@ class MainClass
     Console.WriteLine("----- Logout do Professor -----");
     professorlogin = null;
   }
+  //FIM DO MENU 
+
+
+  //FUNÇÕES MAIN
+
 
   public static void ListarTurmasProfessor()
   {
@@ -413,8 +416,10 @@ class MainClass
     int id_i = int.Parse(Console.ReadLine());
     Instituto ins = ninstituto.Listar(id_i); 
     Campus[] cam = ins.CampusListar();
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("--> Atualizando Campus: ");
     foreach(Campus c1 in cam) Console.WriteLine(c1);
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine();
     Console.WriteLine("Informe o Id do campus a ser atualizado: ");
     int id = int.Parse(Console.ReadLine());
@@ -440,9 +445,11 @@ class MainClass
       return;
     }
     Array.Sort(cam);
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("--> Listando campus: ");
     foreach(Campus i in cam) Console.WriteLine(i);
     Console.WriteLine();
+    Console.WriteLine("------------------------------------------");
     //-----------------------------------
     Console.WriteLine("--> Excluindo Campus: ");
     Console.WriteLine("Informe o Id do Campus a ser excluir: ");
@@ -562,7 +569,7 @@ class MainClass
 
   public static void DiretoriaListar()
   {
-    Console.WriteLine("------------------------------------------");
+    Console.WriteLine("----------------------------------------------------------");
     Console.WriteLine("--> Listando diretorias: ");
     Diretoria[] d = ndiretoria.Listar();
     foreach( Diretoria i in d) Console.WriteLine(i);
@@ -571,7 +578,7 @@ class MainClass
       Console.WriteLine("Nenhuma Diretoria cadastrada. ");
       return;
     }
-    Console.WriteLine("------------------------------------------");
+    Console.WriteLine("----------------------------------------------------------");
   }
 
   
@@ -643,7 +650,14 @@ class MainClass
     int id_cam = int.Parse(Console.ReadLine());
     Campus cam = ins.CampusListar(id_cam);
     Diretoria[] dir = cam.DiretoriaListar();
+    Console.WriteLine("---------------------------------------------------");
     foreach(Diretoria d in dir) Console.WriteLine(d);
+    if(dir.Length == 0)
+    {
+      Console.WriteLine("Nenhuma Diretoria cadastrada. ");
+      return;
+    }
+    Console.WriteLine("---------------------------------------------------");
     Console.WriteLine("\nInforme o Id da diretoria do aluno: ");
     int id_dir = int.Parse(Console.ReadLine());
     Diretoria dir_aln = cam.DiretoriaListar(id_dir);
@@ -655,12 +669,14 @@ class MainClass
   public static void AlunoListar()
   {
     Console.WriteLine("--> Listando alunos ");
+    Console.WriteLine("---------------------------------------------------");
     List<Aluno> alns = naluno.Listar();
     foreach(Aluno a in alns) Console.WriteLine(a);
     if (alns.Count == 0)
     { 
       Console.WriteLine("Nenhum Aluno Cadastrado");
     }
+  Console.WriteLine("---------------------------------------------------");
   }
 
   public static void AlunoAtualizar()
@@ -671,6 +687,7 @@ class MainClass
     int id_Cam = int.Parse(Console.ReadLine());
     Campus cam = ins.CampusListar(id_Cam);
     Diretoria[] diretorias = cam.DiretoriaListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Diretoria d in diretorias) Console.WriteLine(d);
     Console.WriteLine();
     if(diretorias.Length == 0)
@@ -678,11 +695,12 @@ class MainClass
       Console.WriteLine("Nenhuma Diretoria cadastrada. ");
       return;
     }
-
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("Informe o Id da diretoria que o aluno está presente: ");
     int id_dir = int.Parse(Console.ReadLine());
     Diretoria dir = cam.DiretoriaListar(id_dir);
     List<Aluno> alns = dir.AlunoListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Aluno a in alns) Console.WriteLine(a);
     Console.WriteLine();
     if(alns.Count == 0)
@@ -690,6 +708,7 @@ class MainClass
       Console.WriteLine("Nenhum Aluno encontrado. ");
       return;
     }
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("--> Atualizando aluno: ");
     Console.WriteLine("Insira o Id do aluno a ser atualizado: ");
     int id_aln = int.Parse(Console.ReadLine());
@@ -712,12 +731,14 @@ class MainClass
     Campus cam = ins.CampusListar(id_Cam);
 
     Diretoria[] diretorias = cam.DiretoriaListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Diretoria d in diretorias) Console.WriteLine(d);
     if(diretorias.Length == 0)
     {
       Console.WriteLine("Nenhuma Diretoria cadastrada. ");
       return;
     }
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine();
     Console.WriteLine("Informe o Id da diretoria do aluno: ");
     int id_dir = int.Parse(Console.ReadLine());
@@ -765,12 +786,14 @@ class MainClass
   public static void ProfessorListar()
   {
     Console.WriteLine("--> Listando Professores ");
+    Console.WriteLine("---------------------------------------------------");
     List<Professor> prfs = nprofessor.Listar();
     foreach(Professor p in prfs) Console.WriteLine(p);
     if (prfs.Count == 0)
     { 
       Console.WriteLine("Nenhum Professor Cadastrado");
     }
+    Console.WriteLine("---------------------------------------------------");
   }
 
   public static void ProfessorAtualizar()
@@ -781,6 +804,7 @@ class MainClass
     int id_Cam = int.Parse(Console.ReadLine());
     Campus cam = ins.CampusListar(id_Cam);
     Diretoria[] diretorias = cam.DiretoriaListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Diretoria d in diretorias) Console.WriteLine(d);
     Console.WriteLine();
     if(diretorias.Length == 0)
@@ -788,11 +812,12 @@ class MainClass
       Console.WriteLine("Nenhuma Diretoria cadastrada. ");
       return;
     }
-
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("Informe o Id da diretoria que o Professor está presente: ");
     int id_dir = int.Parse(Console.ReadLine());
     Diretoria dir = cam.DiretoriaListar(id_dir);
     List<Professor> prfs = dir.ProfessorListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Professor p in prfs) Console.WriteLine(p);
     Console.WriteLine();
     if(prfs.Count == 0)
@@ -800,6 +825,7 @@ class MainClass
       Console.WriteLine("Nenhum Professor encontrado. ");
       return;
     }
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine("--> Atualizando Professor: ");
     Console.WriteLine("Insira o Id do Professor a ser atualizado: ");
     int id_prf = int.Parse(Console.ReadLine());
@@ -822,12 +848,14 @@ class MainClass
     Campus cam = ins.CampusListar(id_Cam);
 
     Diretoria[] diretorias = cam.DiretoriaListar();
+    Console.WriteLine("------------------------------------------");
     foreach(Diretoria d in diretorias) Console.WriteLine(d);
     if(diretorias.Length == 0)
     {
       Console.WriteLine("Nenhuma Diretoria cadastrada. ");
       return;
     }
+    Console.WriteLine("------------------------------------------");
     Console.WriteLine();
     Console.WriteLine("Informe o Id da diretoria do Professor: ");
     int id_dir = int.Parse(Console.ReadLine());
@@ -863,6 +891,7 @@ class MainClass
     int id_cam = int.Parse(Console.ReadLine());
     Campus cam = ins.CampusListar(id_cam);
     Diretoria[] dir = cam.DiretoriaListar();
+    
     foreach(Diretoria d in dir) Console.WriteLine(d);
     Console.WriteLine("\nInforme o Id da diretoria do ambiente: ");
     int id_dir = int.Parse(Console.ReadLine());
@@ -1024,10 +1053,10 @@ class MainClass
     int id_disc = int.Parse(Console.ReadLine());
     Console.WriteLine("Insira o semestre da turma(20xx.x):");
     string semestre = Console.ReadLine();
-    Console.WriteLine("Informe a hora do inicio da aula: ");
-    int hora_inicio = int.Parse(Console.ReadLine());
-    Console.WriteLine("Informe a hora do fim da aula: ");
-    int hora_fim = int.Parse(Console.ReadLine());
+    Console.WriteLine("Informe a hora do inicio(00h00) da aula: ");
+    string hora_inicio = Console.ReadLine();
+    Console.WriteLine("Informe a hora do fim(00h00) da aula: ");
+    string hora_fim = Console.ReadLine();
 
     Disciplina disc = ndisciplina.Listar(id_disc);
     Turmadiario turma = new Turmadiario(semestre,hora_inicio,hora_fim,disc);
@@ -1052,10 +1081,10 @@ class MainClass
     int id_turma = int.Parse(Console.ReadLine());
     Console.WriteLine("Insira o semestre da turma(20xx.x):");
     string semestre = Console.ReadLine();
-    Console.WriteLine("Informe a hora do inicio da aula: ");
-    int hora_inicio = int.Parse(Console.ReadLine());
-    Console.WriteLine("Informe a hora do fim da aula: ");
-    int hora_fim = int.Parse(Console.ReadLine());
+    Console.WriteLine("Informe a hora do inicio(00h00) da aula: ");
+    string hora_inicio = Console.ReadLine();
+    Console.WriteLine("Informe a hora do fim(00h00) da aula: ");
+    string hora_fim = Console.ReadLine();
 
     DisciplinaListar();
     Console.WriteLine("Informe o Id da disciplina para inserir a Turma: ");
@@ -1084,10 +1113,10 @@ class MainClass
     Console.WriteLine("Informe o Id da diretoria em que o aluno esta cadastrado: ");
     int id_diretoria = int.Parse(Console.ReadLine());
     Diretoria diretoria = ndiretoria.Listar(id_diretoria);
-    Console.WriteLine("----------------------------------------------------");
+    Console.WriteLine("------------------------------------------------------");
     List<Aluno> alunos = diretoria.AlunoListar();
     foreach(Aluno a in alunos) Console.WriteLine(a);
-    Console.WriteLine("----------------------------------------------------");
+    Console.WriteLine("------------------------------------------------------");
     Console.WriteLine("Escolha o Id do aluno para inserir na turma: ");
     int id_aluno = int.Parse(Console.ReadLine());
     Aluno aluno = diretoria.AlunoListar(id_aluno);
@@ -1120,6 +1149,7 @@ class MainClass
     turma.SetProfessor(professor);
     professor.TurmaInserir(turma);
   }
+
   public static void TurmaCadastroAmbiente()
   {
     Console.WriteLine("--> Inserindo Ambiente na Turma: ");

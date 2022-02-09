@@ -142,11 +142,10 @@ class Campus : IComparable
     d_atual.SetDescricao(d.GetDescricao());
   }
 
-
   public int CompareTo(object obj)
   {
     Campus c = (Campus) obj;
-    return this.id.CompareTo(c.id);
+    return this.descricao.CompareTo(c.descricao);
   }
   
   public override string ToString()

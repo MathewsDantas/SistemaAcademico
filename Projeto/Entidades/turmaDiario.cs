@@ -5,14 +5,14 @@ class Turmadiario
 {
   private int id;
   private string semestre;// 2021.2
-  private int hora_inicio;
-  private int hora_fim;
+  private string hora_inicio;
+  private string hora_fim;
   private Professor professor;
   private Disciplina disciplina;
   private Ambiente ambiente;
   private List<Aluno> alunos = new List<Aluno>();
 
-  public Turmadiario(string semestre,int hora_inicio,int hora_fim,Disciplina disciplina)
+  public Turmadiario(string semestre,string hora_inicio,string hora_fim,Disciplina disciplina)
   {
     this.semestre = semestre;
     this.hora_inicio = hora_inicio;
@@ -45,12 +45,12 @@ class Turmadiario
     this.alunos.Add(aluno);
   }
 
-  public void SetHora_inicio(int hora_inicio)
+  public void SetHora_inicio(string hora_inicio)
   {
     this.hora_inicio = hora_inicio;
   }
 
-  public void SetHora_fim(int hora_fim)
+  public void SetHora_fim(string hora_fim)
   {
     this.hora_fim = hora_fim;
   }
@@ -80,12 +80,12 @@ class Turmadiario
     return disciplina;
   }
 
-  public int GetHora_inicio()
+  public string GetHora_inicio()
   {
     return hora_inicio;
   }
 
-  public int GetHora_fim()
+  public string GetHora_fim()
   {
     return hora_fim;
   }
@@ -127,6 +127,6 @@ class Turmadiario
 
   public override string ToString()
   {
-    return "IdTurma:"+id+" - Disciplina:"+disciplina.GetDescricao()+" - Semestre:"+semestre+" - Inicio:"+hora_inicio+" - Fim:"+hora_fim;
+    return "IdTurma:"+id+" - Disciplina:"+disciplina.GetDescricao()+"\n- Semestre:"+semestre+"\n- Inicio:"+hora_inicio+"\n- Fim:"+hora_fim+"\n- Professor:"+professor.GetNome(); 
   }
 }
