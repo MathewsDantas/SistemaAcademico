@@ -127,6 +127,6 @@ class Turmadiario
 
   public override string ToString()
   {
-    return "IdTurma:"+id+" - Disciplina:"+disciplina.GetDescricao()+"\n- Semestre:"+semestre+"\n- Inicio:"+hora_inicio+"\n- Fim:"+hora_fim+"\n- Professor:"+professor.GetNome(); 
+    return "- IdTurma:"+id+"  Disciplina:"+disciplina.GetDescricao()+"\n Semestre:"+semestre+"\n Inicio:"+hora_inicio+"\n Fim:"+hora_fim+"\n";
   }
 }

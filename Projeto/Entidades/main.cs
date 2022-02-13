@@ -651,6 +651,7 @@ class MainClass
     Campus cam = ins.CampusListar(id_cam);
     Diretoria[] dir = cam.DiretoriaListar();
     Console.WriteLine("---------------------------------------------------");
+    Console.WriteLine("--> Listando diretorias: ");
     foreach(Diretoria d in dir) Console.WriteLine(d);
     if(dir.Length == 0)
     {
@@ -774,7 +775,10 @@ class MainClass
     int id_cam = int.Parse(Console.ReadLine());
     Campus cam = ins.CampusListar(id_cam);
     Diretoria[] dir = cam.DiretoriaListar();
+    Console.WriteLine("-----------------------------------------------");
+    Console.WriteLine("--> Listando diretorias: ");
     foreach(Diretoria d in dir) Console.WriteLine(d);
+    Console.WriteLine("-----------------------------------------------");
     Console.WriteLine("\nInforme o Id da diretoria do Professor: ");
     int id_dir = int.Parse(Console.ReadLine());
     Diretoria dir_prf = cam.DiretoriaListar(id_dir);
