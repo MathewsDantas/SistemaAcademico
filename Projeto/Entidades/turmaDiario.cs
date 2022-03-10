@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Turmadiario
+public class Turmadiario
 {
   private int id;
   private string semestre;// 2021.2

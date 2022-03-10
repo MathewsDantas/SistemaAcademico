@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Disciplina
+public class Disciplina
 {
   private int id;
   private string descricao;

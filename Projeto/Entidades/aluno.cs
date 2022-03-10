@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Aluno
+public class Aluno
 {
   private int id;
   private string nome;

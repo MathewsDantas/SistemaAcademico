@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Ambiente
+public class Ambiente
 {
   private int id;
   private string espaco;

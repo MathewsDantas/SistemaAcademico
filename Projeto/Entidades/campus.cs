@@ -1,19 +1,26 @@
 using System;
 
-class Campus : IComparable
+public class Campus : IComparable
 {
   private int id;
   private string descricao;
   private Instituto instituto;
+  private int institutoId;
   private Curso[] cursos = new Curso[1];
   private int ncur;
   private Diretoria[] diretorias = new Diretoria[1];
   private int ndir;
 
+  public int Id {get => id; set => id = value; }
+  public string Descricao {get => descricao; set => descricao = value; }
+  public int InstitutoId { get => institutoId; set => institutoId = value; }
+  public Campus(){}
+
   public Campus(string descricao,Instituto instituto) 
   {
     this.descricao = descricao;
     this.instituto = instituto;
+    this.InstitutoId = instituto.GetId();
   }
 
   public void SetId(int id)
@@ -29,6 +36,7 @@ class Campus : IComparable
   public void SetInstituto(Instituto instituto)
   {
     this.instituto = instituto;
+    this.InstitutoId = instituto.GetId();
   }
 
   public int GetId()

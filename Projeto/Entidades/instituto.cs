@@ -1,7 +1,7 @@
 using System;
 
 
-class Instituto
+public class Instituto
 {
   private int id;
   private string descricao;
@@ -10,6 +10,10 @@ class Instituto
   private Curso[] cursos = new Curso[1];
   private int ncur;
 
+  public int Id {get => id; set => id = value;} //  get { return id;} set {id = value;}
+  public string Descricao {get => descricao; set => descricao = value;}
+  public Instituto(){}
+  
   public Instituto(string descricao)
   {
     this.descricao = descricao;
@@ -71,6 +75,7 @@ class Instituto
   {
     Campus[] c = new Campus[ncam];
     Array.Copy(campus,c,ncam);
+    if(c == null) return null;
     return c;
   }
 

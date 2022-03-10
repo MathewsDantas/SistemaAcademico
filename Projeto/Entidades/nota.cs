@@ -1,6 +1,6 @@
 using System;
 
-class Nota
+public class Nota
 {
   private int id;
   private float nota1;

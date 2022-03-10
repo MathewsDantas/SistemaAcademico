@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Professor
+public class Professor
 {
   private int id;
   private string nome;

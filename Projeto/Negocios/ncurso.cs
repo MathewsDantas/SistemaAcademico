@@ -1,10 +1,17 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Ncurso
 {
   private int ncur;
   private Curso[] cursos = new Curso[5];
 
+  private Ncurso(){}
+  static Ncurso obj = new Ncurso();
+  public static Ncurso Singleton { get => obj;} 
+  
   public void Inserir(Curso c)
   {
     if(cursos.Length == ncur)
@@ -16,7 +23,6 @@ class Ncurso
       if(cursos[i].GetId() > max) max = cursos[i].GetId();
     
     c.SetId(max + 1);
-
     cursos[ncur] = c;
     ncur++;
 
@@ -25,6 +31,35 @@ class Ncurso
     ins.CursoInserir(c);
     cam.CursoInserir(c);
   }
+
+  public void Salvar()
+  {
+    Arquivo<Curso[]> d = new Arquivo<Curso[]>();
+    d.Salvar("./curso.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<Curso[]> d = new Arquivo<Curso[]>();
+    cursos = d.Abrir("./curso.xml");
+    ncur = cursos.Length;
+    AtualizarCampus();
+  }
+
+  public void AtualizarCampus()
+  {
+    for(int i = 0; i < ncur; i++)
+    {
+      Curso c = cursos[i];
+
+      Campus cam = Ncampus.Singleton.ListarId(c.CampusId);
+      if(cam != null){
+        c.SetCampus(cam);
+        cam.CursoInserir(c);
+      }
+    }
+  }
+
 
   public Curso[] Listar()
   {

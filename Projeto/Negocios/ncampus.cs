@@ -1,10 +1,17 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Ncampus
 {
   private Campus[] campus = new Campus[5];
   private int nc;
-
+  
+  private Ncampus(){}
+  static Ncampus obj = new Ncampus();
+  public static Ncampus Singleton { get => obj;} 
+  
   public void Inserir(Campus c)
   {
     if(nc == campus.Length)
@@ -24,6 +31,34 @@ class Ncampus
     Instituto ins = c.GetInstituto();
     if(ins != null) ins.CampusInserir(c);
   }
+
+  public void Salvar()
+  {
+    Arquivo<Campus[]> d = new Arquivo<Campus[]>();
+    d.Salvar("./campus.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<Campus[]> d = new Arquivo<Campus[]>();
+    campus = d.Abrir("./campus.xml");
+    nc = campus.Length;
+    AtualizarInstituto();
+  }
+
+  public void AtualizarInstituto()
+  {
+    for(int i = 0; i<nc; i++)
+    {
+      Campus c = campus[i];
+
+      Instituto ins = Ninstituto.Singleton.Listar(c.InstitutoId);
+      if(ins != null){
+        c.SetInstituto(ins);
+        ins.CampusInserir(c);
+      }
+    }
+  }
   
   public Campus[] Listar()
   {
@@ -36,6 +71,14 @@ class Ncampus
   {
     for(int i=0; i<nc; i++)
       if(campus[i].GetDescricao() == descricao) return campus[i];
+    
+    return null;
+  }
+
+  public Campus ListarId(int id)
+  {
+    for(int i = 0; i<nc; i++)
+      if(campus[i].GetId() == id) return campus[i];
     
     return null;
   }
@@ -65,5 +108,8 @@ class Ncampus
 
     Instituto j = c.GetInstituto();
     if(c != null) j.CampusExcluir(c);
+
+    Curso[] cur = c.CursoListar();
+    foreach(Curso x in cur) Ncurso.Singleton.Excluir(x);
   }
 }

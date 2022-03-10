@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Diretoria
+public class Diretoria
 {
   private int id;
   private string descricao;

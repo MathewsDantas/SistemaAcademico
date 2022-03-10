@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 class MainClass
 {
-  private static Ninstituto ninstituto = new Ninstituto();
-  private static Ncampus ncampus = new Ncampus();
-  private static Ncurso ncurso = new Ncurso();
+  private static Ninstituto ninstituto = Ninstituto.Singleton;
+  private static Ncampus ncampus = Ncampus.Singleton;
+  private static Ncurso ncurso = Ncurso.Singleton;
   private static Ndiretoria ndiretoria = new Ndiretoria();
   private static Naluno naluno = new Naluno();
   private static Nprofessor nprofessor = new Nprofessor();
@@ -18,6 +18,15 @@ class MainClass
 
   static void Main(string[] args)
   {
+    try
+    {
+      ninstituto.Abrir();
+      ncampus.Abrir();
+      ncurso.Abrir();
+    }
+    catch(Exception erro){
+      Console.WriteLine(erro.Message);
+    }
 
     //VARIAVEIS MENU
     int op = 0;
@@ -133,6 +142,16 @@ class MainClass
             op = 50;
           }
     }while(op != 0);
+    
+    try
+    {
+      ninstituto.Salvar();
+      ncampus.Salvar();
+      ncurso.Salvar();
+    }
+    catch(Exception erro){
+      Console.WriteLine(erro.Message);
+    }
     Console.WriteLine("Finalizado.");
   }       
 
@@ -230,7 +249,7 @@ class MainClass
   public static void ListarTurmasAluno()
   {
     List<Turmadiario> turmas = alunologin.TurmaListar();
-    Console.WriteLine($"--> Listando turmas do professor {alunologin.GetNome()}:");
+    Console.WriteLine($"--> Listando turmas do aluno {alunologin.GetNome()}:");
     Console.WriteLine("------------------------------------------------");
     foreach(Turmadiario t in turmas) Console.WriteLine(t);
     if(turmas.Count == 0) Console.WriteLine("Aluno sem turmas.");
@@ -1140,6 +1159,7 @@ class MainClass
     int id_diretoria = int.Parse(Console.ReadLine());
     Diretoria diretoria = ndiretoria.Listar(id_diretoria);
     Console.WriteLine("----------------------------------------------------");
+    Console.WriteLine("--> Listando professores: ");
     List<Professor> professores = diretoria.ProfessorListar();
     foreach(Professor p in professores) Console.WriteLine(p);
     Console.WriteLine("----------------------------------------------------");
