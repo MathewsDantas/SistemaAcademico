@@ -6,16 +6,23 @@ public class Diretoria
   private int id;
   private string descricao;
   private Campus campus;
+  private int campusId;
   private Instituto instituto;
   private List<Aluno> alunos = new List<Aluno>();
   private List<Professor> professores = new List<Professor>();
   private List<Ambiente> ambientes = new List<Ambiente>();
+
+  public int Id {get => id; set => id = value;}
+  public string Descricao {get => descricao; set => descricao = value;}
+  public int CampusId {get => campusId; set => campusId = value;}
+  public Diretoria(){}
 
   public Diretoria(string descricao, Campus campus)
   {
     this.descricao = descricao;
     this.campus = campus;
     this.instituto = campus.GetInstituto();
+    this.campusId = campus.GetId();
   }
 
   public int GetId()
@@ -46,6 +53,8 @@ public class Diretoria
   public void SetCampus(Campus campus)
   {
     this.campus = campus;
+    this.campusId = campus.GetId();
+    this.instituto = campus.GetInstituto();
   }
 
   public void AlunoInserir(Aluno a)

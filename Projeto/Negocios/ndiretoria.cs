@@ -1,10 +1,17 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Ndiretoria
 {
   private int ndir;
   private Diretoria[] diretorias = new Diretoria[5];
 
+  private Ndiretoria(){}
+  static Ndiretoria obj = new Ndiretoria();
+  public static Ndiretoria Singleton { get => obj;}
+  
   public void Inserir(Diretoria d)
   {
     if(diretorias.Length == ndir)
@@ -23,6 +30,33 @@ class Ndiretoria
     cam.DiretoriaInserir(d);
   }
 
+  public void Salvar()
+  {
+    Arquivo<Diretoria[]> d = new Arquivo<Diretoria[]>();
+    d.Salvar("./diretoria.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<Diretoria[]> d = new Arquivo<Diretoria[]>();
+    diretorias = d.Abrir("./diretoria.xml");
+    ndir = diretorias.Length;
+    AtualizarCampus();
+  }
+
+  public void AtualizarCampus()
+  {
+    for(int i = 0; i<ndir; i++)
+    {
+      Diretoria d = diretorias[i];
+
+      Campus cam = Ncampus.Singleton.ListarId(d.CampusId);
+      if(cam != null){
+        d.SetCampus(cam);
+        cam.DiretoriaInserir(d);
+      }
+    }
+  }
   
   public Diretoria[] Listar()
   {

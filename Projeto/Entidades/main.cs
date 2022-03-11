@@ -6,7 +6,7 @@ class MainClass
   private static Ninstituto ninstituto = Ninstituto.Singleton;
   private static Ncampus ncampus = Ncampus.Singleton;
   private static Ncurso ncurso = Ncurso.Singleton;
-  private static Ndiretoria ndiretoria = new Ndiretoria();
+  private static Ndiretoria ndiretoria = Ndiretoria.Singleton;
   private static Naluno naluno = new Naluno();
   private static Nprofessor nprofessor = new Nprofessor();
   private static Nambiente nambiente = new Nambiente();
@@ -23,6 +23,7 @@ class MainClass
       ninstituto.Abrir();
       ncampus.Abrir();
       ncurso.Abrir();
+      ndiretoria.Abrir();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);
@@ -148,6 +149,7 @@ class MainClass
       ninstituto.Salvar();
       ncampus.Salvar();
       ncurso.Salvar();
+      ndiretoria.Salvar();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);

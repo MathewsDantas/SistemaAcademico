@@ -111,5 +111,8 @@ class Ncampus
 
     Curso[] cur = c.CursoListar();
     foreach(Curso x in cur) Ncurso.Singleton.Excluir(x);
+    
+    Diretoria[] dir = c.DiretoriaListar();
+    foreach(Diretoria d in dir) Ndiretoria.Singleton.Excluir(d);
   }
 }
