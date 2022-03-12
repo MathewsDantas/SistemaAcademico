@@ -10,11 +10,13 @@ public class Aluno
   private int diretoriaId;
   private List<Nota> notas = new List<Nota>();
   private List<Turmadiario> turmas = new List<Turmadiario>();
+  private List<int> turmasId = new List<int>();
 
   public int Id {get => id; set => id = value;}
   public int DiretoriaId {get => diretoriaId; set => diretoriaId = value;}
   public string Nome {get => nome; set => nome = value;}
   public long Matricula {get => matricula; set => matricula = value;}
+  public List<int> TurmasId {get => turmasId; set => turmasId = value;}
   public Aluno(){}
   
   public Aluno(string nome,long matricula,Diretoria diretoria)
@@ -44,6 +46,11 @@ public class Aluno
   {
     this.diretoria = diretoria;
     this.diretoriaId = diretoria.GetId();    
+  }
+
+  public void SetTurmaId(Turmadiario turma)
+  {
+    this.turmasId.Add(turma.GetId());
   }
 
   public int GetId()
@@ -98,7 +105,12 @@ public class Aluno
 
   public void TurmaInserir(Turmadiario turma)
   {
-      turmas.Add(turma);
+    turmas.Add(turma);
+  }
+
+  public List<int> TurmaIdListar()
+  {
+    return turmasId;
   }
 
   public List<Turmadiario> TurmaListar()

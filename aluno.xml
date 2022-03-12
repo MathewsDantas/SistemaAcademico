@@ -4,6 +4,35 @@
     <Id>1</Id>
     <DiretoriaId>1</DiretoriaId>
     <Nome>MATHEWS</Nome>
-    <Matricula>34545</Matricula>
+    <Matricula>25435</Matricula>
+    <TurmasId>
+      <int>2</int>
+      <int>3</int>
+    </TurmasId>
+  </Aluno>
+  <Aluno>
+    <Id>2</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>ORBAS</Nome>
+    <Matricula>345</Matricula>
+    <TurmasId>
+      <int>1</int>
+    </TurmasId>
+  </Aluno>
+  <Aluno>
+    <Id>3</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>MECICARENA</Nome>
+    <Matricula>3546</Matricula>
+    <TurmasId>
+      <int>2</int>
+    </TurmasId>
+  </Aluno>
+  <Aluno>
+    <Id>4</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>BORA</Nome>
+    <Matricula>3456757</Matricula>
+    <TurmasId />
   </Aluno>
 </ArrayOfAluno>

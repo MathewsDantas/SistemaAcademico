@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTurmadiario xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Turmadiario>
+    <Id>1</Id>
+    <Semestre>2021.2</Semestre>
+    <Hora_inicio>15H</Hora_inicio>
+    <Hora_fim>23</Hora_fim>
+    <ProfessorId>1</ProfessorId>
+    <DisciplinaId>1</DisciplinaId>
+    <AmbienteId>0</AmbienteId>
+    <AlunosId>
+      <int>2</int>
+    </AlunosId>
+  </Turmadiario>
+  <Turmadiario>
     <Id>2</Id>
     <Semestre>2021.2</Semestre>
-    <Hora_inicio>14h00</Hora_inicio>
-    <Hora_fim>15h30</Hora_fim>
+    <Hora_inicio>16H</Hora_inicio>
+    <Hora_fim>117H00</Hora_fim>
     <ProfessorId>1</ProfessorId>
-    <DisciplinaId>4</DisciplinaId>
+    <DisciplinaId>2</DisciplinaId>
     <AmbienteId>1</AmbienteId>
+    <AlunosId>
+      <int>1</int>
+      <int>3</int>
+    </AlunosId>
+  </Turmadiario>
+  <Turmadiario>
+    <Id>3</Id>
+    <Semestre>2021.2</Semestre>
+    <Hora_inicio>14H</Hora_inicio>
+    <Hora_fim>15H30</Hora_fim>
+    <ProfessorId>2</ProfessorId>
+    <DisciplinaId>3</DisciplinaId>
+    <AmbienteId>0</AmbienteId>
+    <AlunosId>
+      <int>1</int>
+    </AlunosId>
   </Turmadiario>
 </ArrayOfTurmadiario>

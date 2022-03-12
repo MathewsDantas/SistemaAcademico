@@ -35,6 +35,7 @@ class Nturmadiario
     AtualizarProfessor();
     AtualizarAmbiente();
     AtualizarDisciplina();
+    AtualizarAluno();
   }
 
   public void AtualizarProfessor()
@@ -75,6 +76,24 @@ class Nturmadiario
       if(disc != null){
         t.SetDisciplina(disc);
         disc.TurmaInserir(t);
+      }
+    }
+  }
+
+  public void AtualizarAluno()
+  {
+    for(int i = 0; i<turmas.Count; i++)
+    {
+      Turmadiario t = turmas[i];
+      List<int> alunosId = turmas[i].AlunoIdListar();
+      for(int j = 0; j<alunosId.Count; j++)
+      {
+        int id = alunosId[j];
+        Aluno aln = Naluno.Singleton.Listar(id);
+        if(aln != null){
+          t.AlunoInserir(aln);
+          aln.TurmaInserir(t);
+        }
       }
     }
   }

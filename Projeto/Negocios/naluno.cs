@@ -36,7 +36,9 @@ class Naluno
     Arquivo<List<Aluno>> a = new Arquivo<List<Aluno>>();
     alunos = a.Abrir("./aluno.xml");
     AtualizarDiretoria();
+
   }
+  
   public void AtualizarDiretoria()
   {
     for(int i = 0; i<alunos.Count; i++)
@@ -50,6 +52,9 @@ class Naluno
       }
     }
   }
+
+
+  
   public List<Aluno> Listar()
   {
     return alunos;

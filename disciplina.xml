@@ -2,19 +2,19 @@
 <ArrayOfDisciplina xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Disciplina>
     <Id>1</Id>
-    <Descricao>POO</Descricao>
+    <Descricao>GEOGRAFIA</Descricao>
     <Periodo>VESP</Periodo>
     <CursoId>1</CursoId>
   </Disciplina>
   <Disciplina>
     <Id>2</Id>
-    <Descricao>ALGORITMOS</Descricao>
-    <Periodo>MATU</Periodo>
+    <Descricao>POO</Descricao>
+    <Periodo>VESP</Periodo>
     <CursoId>1</CursoId>
   </Disciplina>
   <Disciplina>
-    <Id>4</Id>
-    <Descricao>LOP</Descricao>
+    <Id>3</Id>
+    <Descricao>ALGORITMOS</Descricao>
     <Periodo>VESP</Periodo>
     <CursoId>1</CursoId>
   </Disciplina>

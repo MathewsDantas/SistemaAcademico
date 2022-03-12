@@ -4,6 +4,12 @@
     <Id>1</Id>
     <DiretoriaId>1</DiretoriaId>
     <Nome>GILBERT</Nome>
-    <Matricula>2365</Matricula>
+    <Matricula>6546456</Matricula>
+  </Professor>
+  <Professor>
+    <Id>2</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>JORGIANO</Nome>
+    <Matricula>56456</Matricula>
   </Professor>
 </ArrayOfProfessor>

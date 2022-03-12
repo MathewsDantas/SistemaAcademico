@@ -29,6 +29,7 @@ class MainClass
       nambiente.Abrir();
       ndisciplina.Abrir();
       nturmadiario.Abrir();
+      
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);
@@ -88,6 +89,7 @@ class MainClass
             switch(op)
             {
               case 1: ListarTurmasProfessor(); break;
+              case 2: ListarAlunosProfessor(); break;
               case 99: ProfessorLogout(); break;
             }
             
@@ -311,12 +313,7 @@ class MainClass
     Console.WriteLine("----- Logout do Professor -----");
     professorlogin = null;
   }
-  //FIM DO MENU 
-
-
-  //FUNÇÕES MAIN
-
-
+  
   public static void ListarTurmasProfessor()
   {
     List<Turmadiario> turmas = professorlogin.TurmaListar();
@@ -327,7 +324,22 @@ class MainClass
     Console.WriteLine("------------------------------------------------");
   }
 
-
+  public static void ListarAlunosProfessor()
+  {
+    ListarTurmasProfessor();
+    Console.WriteLine("Informe o Id da turma para listar os alunos: ");
+    int id_turma = int.Parse(Console.ReadLine());
+    Turmadiario turmaEscolhida = professorlogin.TurmaListar(id_turma);
+    List<Aluno> alunos = turmaEscolhida.AlunoListar();
+    Console.WriteLine("------------------------------------------------");
+    Console.WriteLine($"--> Alunos da turma {turmaEscolhida.GetDisciplina().GetDescricao()} {turmaEscolhida.GetSemestre()}: ");
+    foreach(Aluno a in alunos) Console.WriteLine(a);
+    if(alunos.Count == 0) Console.WriteLine("Sem alunos matriculados na turma.");
+    Console.WriteLine("------------------------------------------------");
+  }
+  
+ //FIM DO MENU 
+ //FUNÇÕES MAIN
   public static void InstitutoInserir()
   {
     Console.WriteLine("--> Inserindo Instituto: ");
@@ -1160,7 +1172,9 @@ class MainClass
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turma = nturmadiario.Listar(id_turma);
     turma.AlunoInserir(aluno);
+    turma.SetAlunoId(aluno);
     aluno.TurmaInserir(turma);
+    aluno.SetTurmaId(turma);
   }
 
   public static void TurmaCadastroProfessor()
