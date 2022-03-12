@@ -7,14 +7,22 @@ public class Aluno
   private string nome;
   private long matricula;
   private Diretoria diretoria;
+  private int diretoriaId;
   private List<Nota> notas = new List<Nota>();
   private List<Turmadiario> turmas = new List<Turmadiario>();
 
+  public int Id {get => id; set => id = value;}
+  public int DiretoriaId {get => diretoriaId; set => diretoriaId = value;}
+  public string Nome {get => nome; set => nome = value;}
+  public long Matricula {get => matricula; set => matricula = value;}
+  public Aluno(){}
+  
   public Aluno(string nome,long matricula,Diretoria diretoria)
   {
     this.nome = nome;
     this.matricula = matricula;
     this.diretoria = diretoria;
+    this.diretoriaId = diretoria.GetId();
   }
 
   public void SetId(int id)
@@ -35,6 +43,7 @@ public class Aluno
   public void SetDiretoria(Diretoria diretoria)
   {
     this.diretoria = diretoria;
+    this.diretoriaId = diretoria.GetId();    
   }
 
   public int GetId()

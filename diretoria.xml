@@ -1,8 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDiretoria xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Diretoria>
-    <Id>2</Id>
-    <Descricao>DALE</Descricao>
-    <CampusId>3</CampusId>
-  </Diretoria>
-</ArrayOfDiretoria>
+<ArrayOfDiretoria xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />

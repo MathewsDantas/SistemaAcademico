@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 class Ndiretoria
 {
@@ -82,6 +84,7 @@ class Ndiretoria
 
   public void Excluir(Diretoria d)
   {
+    
     int n = Indice(d);
     if(n == -1) return;
     for(int i = n; i<ndir-1; i++)
@@ -92,6 +95,15 @@ class Ndiretoria
     if(d != null){
       cam.DiretoriaExcluir(d);
     }
+    
+    List<Professor> p = d.ProfessorListar();
+    foreach(Professor i in p.ToList()) Nprofessor.Singleton.Excluir(i);
+    
+    List<Aluno> a = d.AlunoListar();
+    foreach(Aluno i in a.ToList()) Naluno.Singleton.Excluir(i);
+    
+    List<Ambiente> am = d.AmbienteListar();
+    foreach(Ambiente i in am.ToList()) Nambiente.Singleton.Excluir(i);
   }
 
   public void Atualizar(Diretoria d_velha,string descricao_nova)

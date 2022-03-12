@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Nprofessor
 {
   private List<Professor> professores = new List<Professor>();
+  private Nprofessor(){}
+  static Nprofessor obj = new Nprofessor();
+  public static Nprofessor Singleton { get => obj;}
+
 
   public void Inserir(Professor professor)
   {
@@ -16,6 +23,32 @@ class Nprofessor
     professores.Add(professor);
     Diretoria dir = professor.GetDiretoria();
     dir.ProfessorInserir(professor);
+  } 
+  
+  public void Salvar()
+  {
+    Arquivo<List<Professor>> p = new Arquivo<List<Professor>>();
+    p.Salvar("./professor.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<List<Professor>> p = new Arquivo<List<Professor>>();
+    professores = p.Abrir("./professor.xml");
+    AtualizarDiretoria();
+  }
+  public void AtualizarDiretoria()
+  {
+    for(int i = 0; i<professores.Count; i++)
+    {
+      Professor p = professores[i];
+
+      Diretoria dir = Ndiretoria.Singleton.Listar(p.DiretoriaId);
+      if(dir != null){
+        p.SetDiretoria(dir);
+        dir.ProfessorInserir(p);
+      }
+    }
   }
 
   public List<Professor> Listar()

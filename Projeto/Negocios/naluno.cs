@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Naluno
 {
   private List<Aluno> alunos = new List<Aluno>();
+
+  private Naluno(){}
+  static Naluno obj = new Naluno();
+  public static Naluno Singleton { get => obj;}
 
   public void Inserir(Aluno aluno)
   {
@@ -17,7 +24,32 @@ class Naluno
     Diretoria dir = aluno.GetDiretoria();
     dir.AlunoInserir(aluno);
   }
+  
+  public void Salvar()
+  {
+    Arquivo<List<Aluno>> a = new Arquivo<List<Aluno>>();
+    a.Salvar("./aluno.xml",Listar());
+  }
 
+  public void Abrir()
+  {
+    Arquivo<List<Aluno>> a = new Arquivo<List<Aluno>>();
+    alunos = a.Abrir("./aluno.xml");
+    AtualizarDiretoria();
+  }
+  public void AtualizarDiretoria()
+  {
+    for(int i = 0; i<alunos.Count; i++)
+    {
+      Aluno a = alunos[i];
+
+      Diretoria dir = Ndiretoria.Singleton.Listar(a.DiretoriaId);
+      if(dir != null){
+        a.SetDiretoria(dir);
+        dir.AlunoInserir(a);
+      }
+    }
+  }
   public List<Aluno> Listar()
   {
     return alunos;
@@ -57,5 +89,6 @@ class Naluno
     List<Turmadiario> turmas = aluno.TurmaListar();
     foreach(Turmadiario t in turmas)
       t.AlunoExcluir(aluno);
+    
   }
 }

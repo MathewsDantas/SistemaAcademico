@@ -6,12 +6,19 @@ public class Ambiente
   private int id;
   private string espaco;
   private Diretoria diretoria;
+  private int diretoriaId;
   private List<Turmadiario> turmas = new List<Turmadiario>();
+
+  public int Id {get => id; set => id = value;}
+  public int DiretoriaId {get => diretoriaId; set => diretoriaId = value;}
+  public string Espaco {get => espaco; set => espaco = value;}
+  public Ambiente(){}
 
   public Ambiente(string espaco, Diretoria diretoria)
   {
     this.espaco = espaco;
     this.diretoria = diretoria;
+    this.diretoriaId = diretoria.GetId();
   }
 
   public void SetId(int id)
@@ -27,6 +34,7 @@ public class Ambiente
   public void SetDiretoria(Diretoria diretoria)
   {
     this.diretoria = diretoria;
+    this.diretoriaId = diretoria.GetId();
   }
 
   public int GetId()

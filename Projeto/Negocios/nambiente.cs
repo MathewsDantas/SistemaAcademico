@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
 
 class Nambiente
 {
   private List<Ambiente> ambientes = new List<Ambiente>();
-
+  
+  private Nambiente(){}
+  static Nambiente obj = new Nambiente();
+  public static Nambiente Singleton { get => obj;}
+  
   public void Inserir(Ambiente ambiente)
   {
     int max = 0;
@@ -17,7 +24,32 @@ class Nambiente
     Diretoria dir = ambiente.GetDiretoria();
     dir.AmbienteInserir(ambiente);
   }
+  
+  public void Salvar()
+  {
+    Arquivo<List<Ambiente>> a = new Arquivo<List<Ambiente>>();
+    a.Salvar("./ambiente.xml",Listar());
+  }
 
+  public void Abrir()
+  {
+    Arquivo<List<Ambiente>> a = new Arquivo<List<Ambiente>>();
+    ambientes = a.Abrir("./ambiente.xml");
+    AtualizarDiretoria();
+  }
+  public void AtualizarDiretoria()
+  {
+    for(int i = 0; i<ambientes.Count; i++)
+    {
+      Ambiente a = ambientes[i];
+
+      Diretoria dir = Ndiretoria.Singleton.Listar(a.DiretoriaId);
+      if(dir != null){
+        a.SetDiretoria(dir);
+        dir.AmbienteInserir(a);
+      }
+    }
+  }
   public List<Ambiente> Listar()
   {
     return ambientes;
