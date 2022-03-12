@@ -33,6 +33,26 @@
     <DiretoriaId>1</DiretoriaId>
     <Nome>BORA</Nome>
     <Matricula>3456757</Matricula>
-    <TurmasId />
+    <TurmasId>
+      <int>2</int>
+    </TurmasId>
+  </Aluno>
+  <Aluno>
+    <Id>5</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>Mauro</Nome>
+    <Matricula>246456</Matricula>
+    <TurmasId>
+      <int>2</int>
+    </TurmasId>
+  </Aluno>
+  <Aluno>
+    <Id>6</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>Alberto</Nome>
+    <Matricula>436346</Matricula>
+    <TurmasId>
+      <int>2</int>
+    </TurmasId>
   </Aluno>
 </ArrayOfAluno>

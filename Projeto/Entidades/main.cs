@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class MainClass
 {
@@ -331,9 +332,10 @@ class MainClass
     int id_turma = int.Parse(Console.ReadLine());
     Turmadiario turmaEscolhida = professorlogin.TurmaListar(id_turma);
     List<Aluno> alunos = turmaEscolhida.AlunoListar();
+    var ordenados = alunos.OrderBy(al => al.Nome);
     Console.WriteLine("------------------------------------------------");
     Console.WriteLine($"--> Alunos da turma {turmaEscolhida.GetDisciplina().GetDescricao()} {turmaEscolhida.GetSemestre()}: ");
-    foreach(Aluno a in alunos) Console.WriteLine(a);
+    foreach(Aluno a in ordenados) Console.WriteLine(a);
     if(alunos.Count == 0) Console.WriteLine("Sem alunos matriculados na turma.");
     Console.WriteLine("------------------------------------------------");
   }
