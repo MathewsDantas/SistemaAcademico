@@ -8,16 +8,30 @@ public class Turmadiario
   private string hora_inicio;
   private string hora_fim;
   private Professor professor;
+  private int professorId;
   private Disciplina disciplina;
+  private int disciplinaId;
   private Ambiente ambiente;
+  private int ambienteId;
   private List<Aluno> alunos = new List<Aluno>();
 
+
+  public int Id { get => id; set => id = value;}
+  public string Semestre { get => semestre; set => semestre = value;}
+  public string Hora_inicio { get => hora_inicio; set => hora_inicio = value;}
+  public string Hora_fim { get => hora_fim; set => hora_fim = value;}
+  public int ProfessorId { get => professorId; set => professorId = value;}
+  public int DisciplinaId { get => disciplinaId; set => disciplinaId = value;}
+  public int AmbienteId { get => ambienteId; set => ambienteId = value;}
+  public Turmadiario(){}
+  
   public Turmadiario(string semestre,string hora_inicio,string hora_fim,Disciplina disciplina)
   {
     this.semestre = semestre;
     this.hora_inicio = hora_inicio;
     this.hora_fim = hora_fim;
     this.disciplina = disciplina;
+    this.disciplinaId = disciplina.GetId();
   }
 
   public void SetId(int id)
@@ -33,11 +47,13 @@ public class Turmadiario
   public void SetProfessor(Professor professor)
   {
     this.professor = professor;
+    this.professorId = professor.GetId();
   }
 
   public void SetDisciplina(Disciplina disciplina)
   {
     this.disciplina = disciplina;
+    this.disciplinaId = disciplina.GetId();
   }
 
   public void SetAluno(Aluno aluno)
@@ -58,6 +74,7 @@ public class Turmadiario
   public void SetAmbiente(Ambiente ambiente)
   {
     this.ambiente = ambiente;
+    this.ambienteId = ambiente.GetId();
   }
 
   public int GetId()

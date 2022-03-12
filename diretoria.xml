@@ -1,2 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDiretoria xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+<ArrayOfDiretoria xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Diretoria>
+    <Id>1</Id>
+    <Descricao>DITNF</Descricao>
+    <CampusId>1</CampusId>
+  </Diretoria>
+</ArrayOfDiretoria>

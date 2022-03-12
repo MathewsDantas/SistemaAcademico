@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDisciplina xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Disciplina>
+    <Id>1</Id>
+    <Descricao>POO</Descricao>
+    <Periodo>VESP</Periodo>
+    <CursoId>1</CursoId>
+  </Disciplina>
+  <Disciplina>
+    <Id>2</Id>
+    <Descricao>ALGORITMOS</Descricao>
+    <Periodo>MATU</Periodo>
+    <CursoId>1</CursoId>
+  </Disciplina>
+  <Disciplina>
+    <Id>4</Id>
+    <Descricao>LOP</Descricao>
+    <Periodo>VESP</Periodo>
+    <CursoId>1</CursoId>
+  </Disciplina>
+</ArrayOfDisciplina>

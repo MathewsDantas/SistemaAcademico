@@ -5,6 +5,10 @@ class Nturmadiario
 {
   List<Turmadiario> turmas = new List<Turmadiario>();
 
+  private Nturmadiario(){}
+  static Nturmadiario obj = new Nturmadiario();
+  public static Nturmadiario Singleton { get => obj;}
+
   public void Inserir(Turmadiario turma)
   {
     int max = 0;
@@ -18,6 +22,63 @@ class Nturmadiario
     disciplina.TurmaInserir(turma);
   }
 
+  public void Salvar()
+  {
+    Arquivo<List<Turmadiario>> a = new Arquivo<List<Turmadiario>>();
+    a.Salvar("./turmadiario.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<List<Turmadiario>> a = new Arquivo<List<Turmadiario>>();
+    turmas = a.Abrir("./turmadiario.xml");
+    AtualizarProfessor();
+    AtualizarAmbiente();
+    AtualizarDisciplina();
+  }
+
+  public void AtualizarProfessor()
+  {
+    for(int i = 0; i<turmas.Count; i++)
+    {
+      Turmadiario t = turmas[i];
+
+      Professor pro = Nprofessor.Singleton.Listar(t.ProfessorId);
+      if(pro != null){
+        t.SetProfessor(pro);
+        pro.TurmaInserir(t);
+      }
+    }
+  }
+
+  public void AtualizarAmbiente()
+  {
+    for(int i = 0; i<turmas.Count; i++)
+    {
+      Turmadiario t = turmas[i];
+
+      Ambiente amb = Nambiente.Singleton.Listar(t.AmbienteId);
+      if(amb != null){
+        t.SetAmbiente(amb);
+        amb.TurmaInserir(t);
+      }
+    }
+   }
+
+  public void AtualizarDisciplina()
+  {
+    for(int i = 0; i<turmas.Count; i++)
+    {
+      Turmadiario t = turmas[i];
+
+      Disciplina disc = Ndisciplina.Singleton.Listar(t.DisciplinaId);
+      if(disc != null){
+        t.SetDisciplina(disc);
+        disc.TurmaInserir(t);
+      }
+    }
+  }
+  
   public List<Turmadiario> Listar()
   {
     return turmas;

@@ -10,8 +10,8 @@ class MainClass
   private static Naluno naluno = Naluno.Singleton;
   private static Nprofessor nprofessor = Nprofessor.Singleton;
   private static Nambiente nambiente = Nambiente.Singleton;
-  private static Ndisciplina ndisciplina = new Ndisciplina();
-  private static Nturmadiario nturmadiario = new Nturmadiario();
+  private static Ndisciplina ndisciplina = Ndisciplina.Singleton;
+  private static Nturmadiario nturmadiario = Nturmadiario.Singleton;
 
   private static Aluno alunologin = null;
   private static Professor professorlogin = null;  
@@ -27,6 +27,8 @@ class MainClass
       naluno.Abrir();
       nprofessor.Abrir();
       nambiente.Abrir();
+      ndisciplina.Abrir();
+      nturmadiario.Abrir();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);
@@ -156,6 +158,8 @@ class MainClass
       naluno.Salvar();
       nprofessor.Salvar();
       nambiente.Salvar();
+      ndisciplina.Salvar();
+      nturmadiario.Salvar();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);

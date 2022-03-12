@@ -1,2 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfAmbiente xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+<ArrayOfAmbiente xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Ambiente>
+    <Id>1</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Espaco>LAB01</Espaco>
+  </Ambiente>
+</ArrayOfAmbiente>

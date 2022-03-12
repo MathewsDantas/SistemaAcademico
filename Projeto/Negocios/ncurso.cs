@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
@@ -109,6 +110,9 @@ class Ncurso
       ins.CursoExcluir(c);
       cam.CursoExcluir(c);
     }
+
+    List<Disciplina> disc = c.DisciplinaListar();
+    foreach(Disciplina d in disc) Ndisciplina.Singleton.Excluir(d);
   }
 
 }

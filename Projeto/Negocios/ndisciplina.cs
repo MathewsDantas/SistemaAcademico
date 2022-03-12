@@ -1,9 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+
 
 class Ndisciplina
 {
   private List<Disciplina> disciplinas = new List<Disciplina>();
+
+  private Ndisciplina(){}
+  static Ndisciplina obj = new Ndisciplina();
+  public static Ndisciplina Singleton{ get => obj;}
 
   public void Inserir(Disciplina disciplina)
   {
@@ -16,6 +24,33 @@ class Ndisciplina
     disciplinas.Add(disciplina);
     Curso cur = disciplina.GetCurso();
     cur.DisciplinaInserir(disciplina);
+  }
+
+  public void Salvar()
+  {
+    Arquivo<List<Disciplina>> d = new Arquivo<List<Disciplina>>();
+    d.Salvar("./disciplina.xml",Listar());
+  }
+
+  public void Abrir()
+  {
+    Arquivo<List<Disciplina>> d = new Arquivo<List<Disciplina>>();
+    disciplinas = d.Abrir("./disciplina.xml");
+    AtualizarCurso();
+  }
+
+  public void AtualizarCurso()
+  {
+    for(int i = 0; i < disciplinas.Count; i++)
+    {
+      Disciplina d = disciplinas[i];
+
+      Curso cur = Ncurso.Singleton.Listar(d.CursoId);
+      if(cur != null){
+        d.SetCurso(cur);
+        cur.DisciplinaInserir(d);
+      }
+    }
   }
 
   public List<Disciplina> Listar()

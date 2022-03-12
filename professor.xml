@@ -1,2 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProfessor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+<ArrayOfProfessor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Professor>
+    <Id>1</Id>
+    <DiretoriaId>1</DiretoriaId>
+    <Nome>GILBERT</Nome>
+    <Matricula>2365</Matricula>
+  </Professor>
+</ArrayOfProfessor>

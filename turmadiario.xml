@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTurmadiario xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Turmadiario>
+    <Id>2</Id>
+    <Semestre>2021.2</Semestre>
+    <Hora_inicio>14h00</Hora_inicio>
+    <Hora_fim>15h30</Hora_fim>
+    <ProfessorId>1</ProfessorId>
+    <DisciplinaId>4</DisciplinaId>
+    <AmbienteId>1</AmbienteId>
+  </Turmadiario>
+</ArrayOfTurmadiario>

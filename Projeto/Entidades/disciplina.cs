@@ -7,13 +7,21 @@ public class Disciplina
   private string descricao;
   private string periodo;//vespertino
   private Curso curso;
+  private int cursoId;
   private List<Turmadiario> turmas = new List<Turmadiario>();
+
+  public int Id { get => id; set => id = value;}
+  public string Descricao { get => descricao; set => descricao = value;}
+  public string Periodo { get => periodo; set => periodo = value;}
+  public int CursoId { get => cursoId; set => cursoId = value;}
+  public Disciplina(){}
 
   public Disciplina(string descricao, string periodo, Curso curso)
   {
     this.descricao = descricao;
     this.periodo = periodo;
     this.curso = curso;
+    this.cursoId = curso.GetId();
   }
   public void SetId(int id)
   {
@@ -30,6 +38,7 @@ public class Disciplina
   public void SetCurso(Curso curso)
   {
     this.curso = curso;
+    this.cursoId = curso.GetId();
   }
 
   public int GetId()
